@@ -9,6 +9,7 @@ const settings = {
         path: path.join(__dirname, '..', '/public/dist'),
         filename: 'bundle.js',
         publicPath: '/public/dist',
+        clean: true,
     },
     module: {
         rules: [
@@ -21,6 +22,10 @@ const settings = {
                 test: /\.(s(a|c)ss)$/,
                 use: ['style-loader', 'css-loader', 'sass-loader'],
             },
+            {
+                test: /\.(svg|ico|png|gif|jpeg|jpg)$/,
+                type: 'asset/resource',
+            },
         ],
     },
     resolve: {
@@ -31,6 +36,8 @@ const settings = {
             '/': 'http://localhost:3000',
         },
         port,
+        liveReload: true,
+        open: true,
     },
 }
 
