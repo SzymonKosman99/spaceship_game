@@ -1,0 +1,18 @@
+body {
+    @include size(100vh, 100vw);
+    background-image: url('../images/background/background.jpg');
+    background-repeat: repeat;
+    font-size: $primary-font-size;
+    color: $primary-aqua-color;
+}
+
+.container {
+    @include size(100%, 100%);
+    @include flexCenter;
+}
+
+.start {
+    @include size(99%, 60%);
+    @include borderWithShadow;
+    background-color: $primary-dark-color;
+}

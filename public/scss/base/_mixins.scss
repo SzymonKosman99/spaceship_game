@@ -1,0 +1,18 @@
+@mixin size($height, $width) {
+    height: $height;
+    max-height: $height;
+    width: $width;
+    max-width: $width;
+}
+
+@mixin flexCenter {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+@mixin borderWithShadow {
+    border: 1px solid $primary-aqua-color;
+    box-shadow: 0 0 12px 2px $primary-aqua-color;
+    border-radius: 2%;
+}
