@@ -1,0 +1,44 @@
+.btn {
+    position: relative;
+    border: 2px solid $primary-aqua-color;
+    font-size: 20px;
+    font-weight: bold;
+    border-radius: 5px;
+    background-color: $primary-dark-color;
+    color: $primary-aqua-color;
+    letter-spacing: 1px;
+    cursor: pointer;
+    &:hover {
+        @include borderWithShadow;
+        text-shadow: 1px 1px 2px
+            darken($color: $primary-aqua-color, $amount: 25);
+    }
+}
+
+.btn-nav {
+    position: relative;
+    @include specialFontStyle();
+    text-align: center;
+    font-size: 20px;
+    border: 3px solid darken($color: $primary-white-color, $amount: 5);
+    letter-spacing: 1.5px;
+    transition: 0.2s;
+    background-color: $primary-dark-color;
+    cursor: pointer;
+    &::before {
+        content: '';
+        border-top: 3.5px solid darken($color: $primary-white-color, $amount: 5);
+        @include changeEdges(100%, 0%, 16px);
+    }
+    &::after {
+        content: '';
+        border-bottom: 3.5px solid
+            darken($color: $primary-white-color, $amount: 5);
+        @include changeEdges(0%, 100%, 16px);
+    }
+    &:hover {
+        text-decoration-line: underline;
+        text-shadow: 2px 2px 3px
+            darken($color: $primary-white-color, $amount: 30);
+    }
+}

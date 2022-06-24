@@ -11,8 +11,23 @@
     align-items: center;
 }
 
+@mixin specialFontStyle {
+    font-style: oblique;
+    font-weight: 700;
+    color: $primary-white-color;
+}
+
 @mixin borderWithShadow {
     border: 1px solid $primary-aqua-color;
     box-shadow: 0 0 12px 2px $primary-aqua-color;
-    border-radius: 2%;
+}
+
+@mixin changeEdges($top-precent, $left-precent, $unit) {
+    // parent element need to have set position:relative
+    @include size($unit, $unit);
+    position: absolute;
+    top: calc(#{$top-precent} - calc(#{$unit} / 2));
+    left: calc(#{$left-precent} - calc(#{$unit} / 2));
+    transform: rotate(45deg);
+    background-color: $primary-dark-color;
 }
