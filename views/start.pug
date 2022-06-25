@@ -6,8 +6,8 @@ block content
     .start
       h1= "Spaceship game"
       div(class="slider")
-        div(class="slider__prev")= "❮"
-        div(class="slider__next")= "❯"
+        div(class="slider__prev" data-value="-1")= "❮"
+        div(class="slider__next" data-value="1")= "❯"
         div(class="slider__content fade")
           img(src="./images/slider/first_slide/spaceship_medium_blue.png", alt="spaceship")
           img(src="./images/slider/first_slide/space_bomb_blue.png", alt="space-bomb")
@@ -24,13 +24,13 @@ block content
           img(src="./images/slider/third_slide/spaceship_big_red.png", alt="spaceship")
           img(src="./images/slider/third_slide/spaceship_small_red.png", alt="spaceship")
         div(class="slider__dots")
-          span(class="dot active" data-dot="1") 
+          span(class="dot active" data-dot="0") 
+          span(class="dot" data-dot="1") 
           span(class="dot" data-dot="2") 
-          span(class="dot" data-dot="3") 
       nav(class="nav")
         ul(class="list")
           li(class="list__element")
-            button(class="btn-nav" onclick="window.location.href='/shop'" data-start)= "start game ➧" 
+            button(class="btn-nav" onclick="window.location.href='/shop'")= "start game ➧" 
           li(class="list__element")
             button(class="btn-nav" onclick="window.location.href='/info'")= "info ➧"  
           li(class="list__element")
