@@ -1,0 +1,75 @@
+.slider {
+    @include size(210px, 99%);
+    @include flexCenter();
+    flex-wrap: wrap;
+    margin: 30px auto;
+    position: relative;
+    border-radius: 10px;
+}
+
+.slider__next,
+.slider__prev {
+    @include size(35%, 5%);
+    @include flexCenter();
+    position: absolute;
+    top: 25%;
+    font-size: 58px;
+    color: darken($color: $primary-white-color, $amount: 25);
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.slider__next:hover,
+.slider__prev:hover {
+    background-color: lighten($color: $primary-dark-color, $amount: 7);
+    color: $primary-white-color;
+}
+
+.slider__next {
+    left: calc(100% - 5%);
+}
+.slider__prev {
+    left: calc(0%);
+}
+.slider__content {
+    display: none;
+    @include size(170px, 90%);
+    img {
+        display: block;
+        @include size(100%, 25%);
+    }
+}
+
+.fade {
+    @include flexCenter();
+    animation-name: fade;
+    animation-duration: 1.5s;
+}
+
+@keyframes fade {
+    from {
+        opacity: 0.4;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+.slider__dots {
+    @include size(40px, 100%);
+    @include flexCenter();
+}
+
+.dot {
+    @include size(15px, 15px);
+    margin: 0 8px;
+    transition: background-color 0.6s ease;
+    border-radius: 50%;
+    background-color: darken($color: $primary-white-color, $amount: 40);
+    cursor: pointer;
+}
+
+.active,
+.dot:hover {
+    background-color: $primary-white-color;
+}
