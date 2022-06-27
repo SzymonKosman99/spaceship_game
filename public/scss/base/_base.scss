@@ -18,6 +18,15 @@ pre {
     color: $primary-red-color;
 }
 
+details {
+    margin: 0 auto;
+    padding: 10px;
+    width: 80%;
+}
+summary {
+    font-size: 20px;
+}
+
 .warning {
     text-align: center;
     color: $primary-red-color;

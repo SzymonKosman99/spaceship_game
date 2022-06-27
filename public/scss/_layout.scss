@@ -19,3 +19,11 @@ body {
     border-radius: 2%;
     background-color: $primary-dark-color;
 }
+
+.info {
+    @include size(99%, 62%);
+    @include borderWithShadow;
+    padding: 20px;
+    border-radius: 2%;
+    background-color: $primary-dark-color;
+}

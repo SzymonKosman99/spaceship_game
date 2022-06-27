@@ -42,3 +42,10 @@
             darken($color: $primary-white-color, $amount: 30);
     }
 }
+
+.info {
+    .btn-nav {
+        padding: 10px 22px;
+        left: 80%;
+    }
+}

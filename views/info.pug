@@ -1,0 +1,22 @@
+extends layout
+
+block content
+  .container
+    .info
+      h1="Informations about this game"
+      details
+        summary="What is about in this game?"
+        ul(class="list")
+          li(class="list__element")="You have to destroy specific number of enemies spaceships by bullets and make sure that no one will fly under the screen ,if enemy does it you will lose life point"
+          li(class="list__element")="You cannot have collision with enemy spaceship if you do you will lose lifes points"
+          li(class="list__element")="Avoid enemy bullets if you will be hit by enemy bullet you will lose life point"
+          li(class="list__element")="When a player has 0 life points he lose"
+          li(class="list__element")="If player will destroy current ships number,he will increase lvl and be pathed to shop panel "
+      details
+        summary="How to play this game?"
+        ul(class="list")
+          li(class="list__element")="It is simple you can move left ⇦  and right ⇨ via arrows on your keyboard "
+          li(class="list__element")="When you wanna shot press space on your keyboard"
+          li(class="list__element")="For every destroyed spaceship you will receive specific quantity of money"
+          li(class="list__element")="By your earned money u can buy new advanced spaceship or new combact abilities in shop panel"
+      button(class="btn-nav" onclick="window.location.href='/'")="Back ↺"
