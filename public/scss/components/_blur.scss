@@ -1,0 +1,7 @@
+.blur {
+    @include size(100%, 100%);
+    @include position(0%, 0%);
+    z-index: 1;
+    background-color: darken($color: $primary-aqua-color, $amount: 46);
+    opacity: 0.8;
+}
