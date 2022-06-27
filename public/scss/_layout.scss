@@ -1,5 +1,6 @@
 body {
     @include size(100vh, 100vw);
+    position: relative;
     background-image: url('../images/background/background.jpg');
     background-repeat: repeat;
     font-size: $primary-font-size;
