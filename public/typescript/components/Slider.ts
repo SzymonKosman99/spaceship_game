@@ -40,18 +40,19 @@ class Slider {
             this.slides.length === 3 &&
             this.dots.length === 3
         ) {
-            console.log(this.arrowPrev, this.arrowNext, this.slides, this.dots);
             return true;
         } else return false;
     }
 
     private displaySlide() {
-        if (0 > this.slideIndex) this.slideIndex = 0;
-        if (this.slides.length - 1 < this.slideIndex) this.slideIndex = 2;
+        if (0 > this.slideIndex) return (this.slideIndex = 0);
+        if (this.slides.length - 1 < this.slideIndex)
+            return (this.slideIndex = 2);
         this.slides.forEach((slide) => slide.classList.remove('fade'));
         this.dots.forEach((dot) => dot.classList.remove('active'));
         this.slides[this.slideIndex].classList.add('fade');
         this.dots[this.slideIndex].classList.add('active');
+        document.querySelector<HTMLAudioElement>('#click').play();
     }
 }
 
