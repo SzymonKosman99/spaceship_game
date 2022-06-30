@@ -46,7 +46,15 @@
 .info,
 .settings {
     .btn-nav {
+        margin-top: 5px;
         padding: 10px 22px;
-        left: 80%;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+}
+
+.settings {
+    .btn-nav {
+        margin-top: 4%;
     }
 }

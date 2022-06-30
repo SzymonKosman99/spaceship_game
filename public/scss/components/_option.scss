@@ -1,0 +1,55 @@
+.option {
+    @include size(100%, 100%);
+    position: relative;
+    padding-left: 35px;
+    margin-bottom: 12px;
+    cursor: pointer;
+    font-size: 22px;
+    user-select: none;
+    p {
+        display: inline-block;
+        @include size(100%, 80%);
+        line-height: 200%;
+        color: $primary-aqua-color;
+    }
+}
+
+.option input {
+    @include size(0%, 0%);
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+}
+
+.checkmark {
+    position: absolute;
+    top: 0;
+    left: 0%;
+    height: 25px;
+    width: 25px;
+    background-color: darken($color: $primary-aqua-color, $amount: 30);
+}
+
+.option:hover input ~ .checkmark {
+    background-color: darken($color: $primary-aqua-color, $amount: 20);
+}
+
+.checkmark:after {
+    content: '';
+    position: absolute;
+    display: none;
+}
+
+.option input:checked ~ .checkmark:after {
+    display: block;
+}
+
+.option .checkmark:after {
+    left: 9px;
+    top: 5px;
+    width: 5px;
+    height: 10px;
+    border: solid $primary-white-color;
+    border-width: 0 3px 3px 0;
+    transform: rotate(45deg);
+}
