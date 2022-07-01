@@ -1,3 +1,5 @@
+import getCookieValue from '../getCookieValue';
+
 class Buttons {
     buttons = Array.from(document.querySelectorAll<HTMLButtonElement>('.btn'));
     navButtons = Array.from(
@@ -10,7 +12,9 @@ class Buttons {
             const allButtons = this.buttons.concat(this.navButtons);
             allButtons.forEach((btn) => {
                 btn.addEventListener('click', () => {
-                    this.clickSound.play();
+                    if (getCookieValue('muted_click') === 'inactive') {
+                        this.clickSound.play();
+                    }
                     if (btn.dataset.href) {
                         setTimeout(() => {
                             window.location.href = `${btn.dataset.href}`;

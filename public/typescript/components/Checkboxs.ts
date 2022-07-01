@@ -1,4 +1,6 @@
-type SettingsType = 'muted_click' | 'muted_background' | 'spaceship_blue';
+import getCookieValue from '../getCookieValue';
+
+type SettingsType = 'muted_click' | 'muted_background' | 'spaceship_red';
 type IsActive = 'active' | 'inactive';
 
 class Checkboxs {
@@ -9,6 +11,7 @@ class Checkboxs {
 
     public init() {
         if (this.checkItems()) {
+            this.checkStatus();
             this.checkboxs.forEach((checkbox) => {
                 checkbox.addEventListener('click', () => {
                     let setting = checkbox.dataset.setting as SettingsType;
@@ -27,14 +30,32 @@ class Checkboxs {
         }
     }
 
+    private async toggleOption(setting: SettingsType, value: IsActive) {
+        const data = {
+            setting,
+            value,
+        };
+        return fetch('/settings', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ data }),
+        });
+    }
+
     private checkItems() {
         if (this.clickSound && this.checkboxs.length !== 0) {
             return true;
         } else return false;
     }
 
-    private async toggleOption(setting: SettingsType, value: IsActive) {
-        console.log(setting, value);
+    private checkStatus() {
+        this.checkboxs.forEach((checkbox) => {
+            if (getCookieValue(checkbox.dataset.setting) === 'active') {
+                checkbox.checked = true;
+            }
+        });
     }
 }
 
