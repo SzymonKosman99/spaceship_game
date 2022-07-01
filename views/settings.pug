@@ -4,6 +4,21 @@ block content
   .container
     .settings  
       h1="Settings"
+      .settings__options
+        ul(class="list")
+          li(class="list__element")
+            label(class="option")
+              input(type="checkbox" data-checkbox data-setting='muted_click' data-value='inactive')
+              span(class="checkmark")
+              p="Mute click sound when button is pressed"
+          li(class="list__element")
+            label(class="option")
+              input(type="checkbox" data-checkbox data-setting='muted_background' data-value='inactive' )
+              span(class="checkmark")
+              p="Mute space background sound "
+          li(class="list__element")
+            label(class="option")
+              input(type="checkbox" data-checkbox data-setting='spaceship_red' data-value="inactive" )
+              span(class="checkmark")
+              p="Player play as red spaceship"
       button(class="btn-nav" data-href='/')="Back ↺"
-      button(class="btn" data-blast style="padding:10px 20px")="play blast"
-      button(class="btn" data-blast2 style="padding:10px 20px")="play blast"

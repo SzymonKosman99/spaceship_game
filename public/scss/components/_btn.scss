@@ -46,15 +46,11 @@
 .info,
 .settings {
     .btn-nav {
+        position: absolute;
+        left: 50%;
+        top: 89%;
         margin-top: 5px;
         padding: 10px 22px;
-        left: 50%;
         transform: translateX(-50%);
-    }
-}
-
-.settings {
-    .btn-nav {
-        margin-top: 4%;
     }
 }

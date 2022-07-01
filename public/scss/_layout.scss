@@ -34,27 +34,10 @@ body {
     border-radius: 2%;
     background-color: $primary-dark-color;
     &__options {
-        margin: 20px auto;
-        height: 70%;
-        width: 80%;
+        margin: 10vh auto;
+        @include size(60%, 60%);
+        @include flexCenter;
         position: relative;
-        text-align: center;
-        font-size: 12px;
         transition: 0.2s;
-        border: 2.5px solid darken($color: $primary-white-color, $amount: 5);
-        // background-color: darken($color: $primary-dark-color, $amount: 2.5);
-        cursor: pointer;
-        &::before {
-            content: '';
-            border-top: 3.5px solid
-                darken($color: $primary-white-color, $amount: 5);
-            @include changeEdges(100%, 0%, 16px);
-        }
-        &::after {
-            content: '';
-            border-bottom: 3.5px solid
-                darken($color: $primary-white-color, $amount: 5);
-            @include changeEdges(0%, 100%, 16px);
-        }
     }
 }

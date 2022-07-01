@@ -1,37 +1,53 @@
 .option {
-    @include size(100%, 100%);
+    display: block;
+    @include size(50%, 100%);
+    @include specialFontStyle();
+    @include flexCenter;
     position: relative;
-    padding-left: 35px;
-    margin-bottom: 12px;
-    cursor: pointer;
-    font-size: 22px;
+    font-size: 18px;
     user-select: none;
+    border: 3px solid darken($color: $primary-white-color, $amount: 5);
+    background-color: $primary-dark-color;
+    cursor: pointer;
     p {
-        display: inline-block;
+        @include flexCenter;
         @include size(100%, 80%);
-        line-height: 200%;
-        color: $primary-aqua-color;
+        font-size: 15px;
+        color: $primary-white-color;
+    }
+
+    &::before {
+        content: '';
+        border-top: 3.5px solid darken($color: $primary-white-color, $amount: 5);
+        @include changeEdges(100%, 0%, 16px);
+    }
+    &::after {
+        content: '';
+        border-bottom: 3.5px solid
+            darken($color: $primary-white-color, $amount: 5);
+        @include changeEdges(0%, 100%, 16px);
+    }
+    &:hover {
+        text-decoration-line: underline;
+        text-shadow: 2px 2px 3px
+            darken($color: $primary-white-color, $amount: 30);
     }
 }
 
 .option input {
-    @include size(0%, 0%);
-    position: absolute;
     opacity: 0;
     cursor: pointer;
 }
 
 .checkmark {
-    position: absolute;
-    top: 0;
-    left: 0%;
-    height: 25px;
-    width: 25px;
+    position: relative;
+    height: 20px;
+    width: 20px;
     background-color: darken($color: $primary-aqua-color, $amount: 30);
 }
 
 .option:hover input ~ .checkmark {
-    background-color: darken($color: $primary-aqua-color, $amount: 20);
+    background-color: darken($color: $primary-aqua-color, $amount: 9);
 }
 
 .checkmark:after {
@@ -45,7 +61,8 @@
 }
 
 .option .checkmark:after {
-    left: 9px;
+    position: absolute;
+    left: 8px;
     top: 5px;
     width: 5px;
     height: 10px;

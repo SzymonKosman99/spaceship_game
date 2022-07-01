@@ -18,3 +18,7 @@
         height: 80%;
     }
 }
+
+.settings .list .list__element {
+    @include flexCenter;
+}
