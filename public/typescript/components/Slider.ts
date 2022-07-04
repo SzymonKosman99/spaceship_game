@@ -1,13 +1,11 @@
+import { DOMElements } from '../base';
+
 class Slider {
     private slideIndex = 0;
-    private arrowPrev = document.querySelector<HTMLDivElement>('.slider__prev');
-    private arrowNext = document.querySelector<HTMLDivElement>('.slider__next');
-    private slides = Array.from(
-        document.querySelectorAll<HTMLDivElement>('.slider__content')
-    );
-    private dots = Array.from(
-        document.querySelectorAll<HTMLSpanElement>('.dot')
-    );
+    private arrowPrev = DOMElements.arrowPrev;
+    private arrowNext = DOMElements.arrowNext;
+    private slides = DOMElements.slides;
+    private dots = DOMElements.dots;
 
     public init() {
         if (this.checkItems()) {

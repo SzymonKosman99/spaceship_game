@@ -1,11 +1,10 @@
+import { DOMElements } from '../base';
 import getCookieValue from '../getCookieValue';
 
 class Buttons {
-    buttons = Array.from(document.querySelectorAll<HTMLButtonElement>('.btn'));
-    navButtons = Array.from(
-        document.querySelectorAll<HTMLButtonElement>('.btn-nav')
-    );
-    clickSound = document.querySelector<HTMLAudioElement>('#click');
+    private buttons = DOMElements.buttons;
+    private navButtons = DOMElements.navButtons;
+    private clickSound = DOMElements.clickSound;
 
     public init() {
         if (this.checkItems()) {

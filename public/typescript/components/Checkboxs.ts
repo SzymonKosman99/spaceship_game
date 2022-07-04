@@ -1,14 +1,9 @@
 import getCookieValue from '../getCookieValue';
-
-type SettingsType = 'muted_click' | 'muted_background' | 'spaceship_red';
-type IsActive = 'active' | 'inactive';
+import { SettingsType, IsActive, DOMElements } from '../base';
 
 class Checkboxs {
-    checkboxs = Array.from(
-        document.querySelectorAll<HTMLInputElement>('[data-checkbox]')
-    );
-    clickSound = document.querySelector<HTMLAudioElement>('#click');
-
+    private checkboxs = DOMElements.checkboxs;
+    private clickSound = DOMElements.clickSound;
     public init() {
         if (this.checkItems()) {
             this.checkStatus();
