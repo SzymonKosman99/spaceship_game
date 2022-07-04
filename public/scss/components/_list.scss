@@ -5,20 +5,52 @@
     width: 100%;
 }
 
-.list__element {
-    flex-grow: 1;
+.shop__section--big .list,
+.shop__section .list {
+    justify-content: space-evenly;
+}
+
+.list__element,
+.list__element--shop {
     width: 100%;
     padding: 10px 0px;
     font-size: 16px;
     list-style: none;
     color: $primary-white-color;
-
-    .btn-nav {
-        width: 100%;
-        height: 80%;
+    img {
+        display: block;
+        @include size(100%, 25%);
+        margin: 0 2.5%;
+        float: left;
+        padding: 10px;
+        background-color: darken($color: $primary-dark-color, $amount: 50);
     }
+}
+.list__element {
+    flex-grow: 1;
 }
 
 .settings .list .list__element {
     @include flexCenter;
+}
+
+.list__element--shop {
+    @include size(30%, 100%);
+    position: relative;
+    border: 3px solid darken($color: $primary-white-color, $amount: 5);
+    &::before {
+        content: '';
+        border-top: 3.5px solid darken($color: $primary-white-color, $amount: 5);
+        @include changeEdges(100%, 0%, 16px);
+    }
+    &::after {
+        content: '';
+        border-bottom: 3.5px solid
+            darken($color: $primary-white-color, $amount: 5);
+        @include changeEdges(0%, 100%, 16px);
+    }
+}
+
+.shop__section .list .list__element--shop {
+    @include size(44%, 100%);
 }
