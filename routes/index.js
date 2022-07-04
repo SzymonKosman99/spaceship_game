@@ -10,13 +10,14 @@ router.get('/', (req, res, next) => {
     ) {
         res.cookie('muted_click', 'inactive');
         res.cookie('muted_background', 'inactive');
+        res.cookie('destroyer_missle', 'inactive');
         res.cookie('spaceship_red', 'inactive');
+        res.cookie('spaceship_model', 'inactive');
+        res.cookie('space_mine', 'inactive');
+        res.cookie('player_money', '1000');
 
         return res.render('start', {
             title: 'Spaceship game',
-            muted_click: 'inactive',
-            muted_background: 'inactive',
-            spaceship_red: 'inactive',
         });
     }
 
