@@ -3,13 +3,12 @@ html
   head
     title= title
     meta(charset='utf-8')
-    script(src="http://localhost:5000/public/dist/bundle.js") 
   body
     audio(loop style="display:none" id="bgc-sound")
       source(src="../sounds/space-sound.mp3")
-    audio(id="blast")="Your browser do not support HTML 5 audio tag"
+    audio(data-blast)="Your browser do not support HTML 5 audio tag"
       source(type="audio/mpeg" src='../sounds/blast.mp3')
-    audio(id="click")="Your browser do not support HTML 5 audio tag"
+    audio(data-click)="Your browser do not support HTML 5 audio tag"
       source(type="audio/mpeg" src='../sounds/click.mp3')
       
 
