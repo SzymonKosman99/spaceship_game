@@ -1,21 +1,7 @@
 .option {
-    display: block;
     @include size(50%, 100%);
-    @include specialFontStyle();
-    @include flexCenter;
     position: relative;
-    font-size: 18px;
-    user-select: none;
     border: 3px solid darken($color: $primary-white-color, $amount: 5);
-    background-color: $primary-dark-color;
-    cursor: pointer;
-    p {
-        @include flexCenter;
-        @include size(100%, 80%);
-        font-size: 15px;
-        color: $primary-white-color;
-    }
-
     &::before {
         content: '';
         border-top: 3.5px solid darken($color: $primary-white-color, $amount: 5);
@@ -27,6 +13,24 @@
             darken($color: $primary-white-color, $amount: 5);
         @include changeEdges(0%, 100%, 16px);
     }
+}
+
+.option,
+.option--shop {
+    display: block;
+    @include specialFontStyle();
+    @include flexCenter;
+    font-size: 18px;
+    user-select: none;
+    background-color: $primary-dark-color;
+    cursor: pointer;
+    p {
+        @include flexCenter;
+        @include size(100%, 80%);
+        font-size: 15px;
+        color: $primary-white-color;
+    }
+
     &:hover {
         text-decoration-line: underline;
         text-shadow: 2px 2px 3px
@@ -34,7 +38,14 @@
     }
 }
 
-.option input {
+.option--shop {
+    @include size(60%, 70%);
+    p {
+        font-size: 22px;
+    }
+}
+.option input,
+.option--shop input {
     opacity: 0;
     cursor: pointer;
 }
@@ -43,11 +54,12 @@
     position: relative;
     height: 20px;
     width: 20px;
-    background-color: darken($color: $primary-aqua-color, $amount: 30);
+    background-color: darken($color: $primary-white-color, $amount: 22);
 }
 
-.option:hover input ~ .checkmark {
-    background-color: darken($color: $primary-aqua-color, $amount: 9);
+.option:hover input ~ .checkmark,
+.option--shop:hover input ~ .checkmark {
+    background-color: darken($color: $primary-white-color, $amount: 5);
 }
 
 .checkmark:after {
@@ -56,17 +68,19 @@
     display: none;
 }
 
-.option input:checked ~ .checkmark:after {
+.option input:checked ~ .checkmark:after,
+.option--shop input:checked ~ .checkmark:after {
     display: block;
 }
 
-.option .checkmark:after {
+.option .checkmark:after,
+.option--shop .checkmark:after {
     position: absolute;
     left: 8px;
     top: 5px;
     width: 5px;
     height: 10px;
-    border: solid $primary-white-color;
+    border: solid lighten($color: $primary-dark-color, $amount: 4);
     border-width: 0 3px 3px 0;
     transform: rotate(45deg);
 }
