@@ -1,0 +1,57 @@
+extends layout
+
+
+block content 
+   .container
+     .shop
+       h1="Your resources: "
+         span(class="wallet")="1 000"
+       .shop__content
+         .current-spaceship
+           img(src="../images/slider/first_slide/spaceship_medium_blue.png", alt="ship" data-current-spaceship) 
+         section(class='shop__section')
+           ul(class="list")
+             li(class="list__element--shop")
+               img(src="../skk/ll", alt="bullet" data-product="destroyer_missle")
+               .option--shop
+                 p="Destroyer missle"
+               button(class="btn" data-buy="")="buy"
+               button(class="btn" data-info="destroyer_missle")="info"
+             li(class="list__element--shop")
+               img(src="../skk/ll", alt="space mine" data-product="space_mine")
+               .option--shop
+                 p="Space mines"
+               button(class="btn" data-buy="")="buy"
+               button(class="btn" data-info="space_mine")="info"
+         section(class='shop__section--big')
+           ul(class="list")
+             li(class="list__element--shop")
+               img(src="../skk/ll", alt="spaceship" data-product="spaceship_small")
+               label(class="option--shop")
+                 input(type="checkbox" data-checkbox data-value='inactive')
+                 span(class="checkmark")
+                 p="Spaceship small"
+               button(class="btn" data-buy="")="buy"
+               button(class="btn" data-info="spaceship_small")="info"
+             li(class="list__element--shop")
+               img(src="../skk/ll", alt="spaceship" data-product="spaceship_big")
+               label(class="option--shop")
+                 input(type="checkbox" data-checkbox data-value='inactive')
+                 span(class="checkmark")
+                 p="Spaceship Big"
+               button(class="btn" data-buy="")="buy"
+               button(class="btn" data-info="spaceship_big")="info"
+             li(class="list__element--shop")
+               img(src="../skk/ll", alt="spaceship" data-product="spaceship_medium")
+               label(class="option--shop")
+                 input(type="checkbox" data-checkbox data-value='inactive')
+                 span(class="checkmark")
+                 p="Spaceship medium"
+               button(class="btn" data-buy="")="buy"
+               button(class="btn" data-info="spacehip_medium")="info"
+         button(class="btn-nav" data-href='/game')='Play ➧'
+         button(class="btn-nav" data-href='/')='Back ↺'
+   script(src="http://localhost:5000/public/dist/bundle.js")
+
+               
+             
