@@ -6,6 +6,7 @@ class Slider {
     private arrowNext = DOMElements.arrowNext;
     private slides = DOMElements.slides;
     private dots = DOMElements.dots;
+    private clickSound = DOMElements.clickSound;
 
     public init() {
         if (this.checkItems()) {
@@ -50,7 +51,7 @@ class Slider {
         this.dots.forEach((dot) => dot.classList.remove('active'));
         this.slides[this.slideIndex].classList.add('fade');
         this.dots[this.slideIndex].classList.add('active');
-        document.querySelector<HTMLAudioElement>('#click').play();
+        this.clickSound.play();
     }
 }
 
