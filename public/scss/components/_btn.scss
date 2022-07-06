@@ -10,7 +10,7 @@
     }
 }
 
-.btn--purchased {
+.btn--inactive {
     @include basicButtonStyle;
     color: $primary-white-color;
     border: 1px solid $primary-white-color;
@@ -84,7 +84,7 @@
 }
 
 .list__element--shop .btn,
-.list__element--shop .btn--purchased {
+.list__element--shop .btn--inactive {
     @include size(40%, 30%);
     margin: 0 2.5%;
 }
