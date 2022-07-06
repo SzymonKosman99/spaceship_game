@@ -12,7 +12,10 @@ router.get('/', (req, res, next) => {
         res.cookie('muted_background', 'inactive');
         res.cookie('destroyer_missle', 'inactive');
         res.cookie('spaceship_red', 'inactive');
-        res.cookie('spaceship_model', 'inactive');
+        res.cookie('spaceship_model', 'spaceship_small');
+        res.cookie('spaceship_small', 'active');
+        res.cookie('spaceship_medium', 'inactive');
+        res.cookie('spaceship_big', 'inactive');
         res.cookie('space_mine', 'inactive');
         res.cookie('player_money', '1000');
 
