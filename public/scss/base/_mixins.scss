@@ -22,6 +22,15 @@
     box-shadow: 0 0 12px 2px $primary-aqua-color;
 }
 
+@mixin basicButtonStyle {
+    position: relative;
+    font-size: 20px;
+    font-weight: bold;
+    border-radius: 5px;
+    background-color: $primary-dark-color;
+    letter-spacing: 1px;
+}
+
 @mixin changeEdges($top-precent, $left-precent, $unit) {
     // parent element need to have set position:relative
     @include size($unit, $unit);

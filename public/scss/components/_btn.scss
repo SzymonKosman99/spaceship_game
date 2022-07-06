@@ -1,18 +1,20 @@
 .btn {
-    position: relative;
+    @include basicButtonStyle;
     border: 2px solid $primary-aqua-color;
-    font-size: 20px;
-    font-weight: bold;
-    border-radius: 5px;
-    background-color: $primary-dark-color;
     color: $primary-aqua-color;
-    letter-spacing: 1px;
     cursor: pointer;
     &:hover {
         @include borderWithShadow;
         text-shadow: 1px 1px 2px
             darken($color: $primary-aqua-color, $amount: 25);
     }
+}
+
+.btn--purchased {
+    @include basicButtonStyle;
+    color: $primary-white-color;
+    border: 1px solid $primary-white-color;
+    box-shadow: 0 0 3px 1px $primary-white-color;
 }
 
 .btn-nav {
@@ -81,7 +83,8 @@
     height: 80%;
 }
 
-.list__element--shop .btn {
+.list__element--shop .btn,
+.list__element--shop .btn--purchased {
     @include size(40%, 30%);
     margin: 0 2.5%;
 }
