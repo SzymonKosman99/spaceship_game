@@ -16,7 +16,22 @@ export const DOMElements = {
     slides: Array.from(
         document.querySelectorAll<HTMLDivElement>('.slider__content')
     ),
+    spaceshipModel: document.querySelector<HTMLImageElement>(
+        '[data-spaceship-model]'
+    ),
+    settingsLayout: document.querySelector<HTMLDivElement>('.settings'),
+    shopLayout: document.querySelector<HTMLDivElement>('.shop'),
 };
 
 export type IsActive = 'active' | 'inactive';
-export type SettingsType = 'muted_click' | 'muted_background' | 'spaceship_red';
+
+export type SpaceshipModel =
+    | 'spaceship_small'
+    | 'spaceship_medium'
+    | 'spaceship_big';
+
+export type SettingsType =
+    | 'muted_click'
+    | 'muted_background'
+    | 'spaceship_red'
+    | 'spaceship_model';
