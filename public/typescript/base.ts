@@ -33,5 +33,11 @@ export type SpaceshipModel =
 export type SettingsType =
     | 'muted_click'
     | 'muted_background'
+    | 'destroyer_missle'
     | 'spaceship_red'
-    | 'spaceship_model';
+    | 'spaceship_model'
+    | 'spaceship_small'
+    | 'spaceship_medium'
+    | 'spaceship_big'
+    | 'space_mine'
+    | 'player_money';
