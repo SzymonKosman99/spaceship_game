@@ -5,25 +5,25 @@ router.get('/', (req, res) => {
     res.render('settings');
 });
 
-router.post('/', (req, res) => {
-    const { setting, value } = req.body.data;
-    if (setting && value) {
-        switch (setting) {
+router.put('/', (req, res) => {
+    const { cookieName, value } = req.body;
+    if (cookieName && value) {
+        switch (cookieName) {
             case 'muted_click':
-                res.cookie(setting, value);
+                res.cookie(cookieName, value);
                 break;
             case 'muted_background':
-                res.cookie(setting, value);
+                res.cookie(cookieName, value);
                 break;
             case 'spaceship_red':
-                res.cookie(setting, value);
+                res.cookie(cookieName, value);
                 break;
 
             default:
                 break;
         }
     }
-    res.json({ message: 'ok' });
+    res.json({ message: 'updated successfully' });
 });
 
 module.exports = router;

@@ -4,12 +4,12 @@ const router = express.Router();
 router.get('/shop', (req, res) => {
     res.render('shop');
 });
-router.post('/shop', (req, res) => {
-    const { setting, value } = req.body.data;
-    if (setting && value) {
-        res.cookie(setting, value);
+router.put('/shop', (req, res) => {
+    const { cookieName, value } = req.body;
+    if (cookieName && value) {
+        res.cookie(cookieName, value);
     }
-    res.json({ message: 'ok' });
+    res.json({ message: 'updated successfully' });
 });
 
 module.exports = router;
