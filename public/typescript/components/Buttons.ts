@@ -1,10 +1,13 @@
-import { DOMElements } from '../base';
+import Table from './Table';
+
+import { DOMElements, Product } from '../base';
 import State from '../State';
 
 class Buttons {
     private buttons = DOMElements.buttons;
     private navButtons = DOMElements.navButtons;
     private clickSound = DOMElements.clickSound;
+    private table = new Table();
 
     public init() {
         if (this.checkItems()) {
@@ -19,6 +22,10 @@ class Buttons {
     private handleClick(btn: HTMLButtonElement) {
         if (State.muted_click === 'inactive') {
             this.clickSound.play();
+        }
+        if (btn.dataset.info) {
+            const product = btn.dataset.info as Product;
+            this.displayInfo(product);
         }
 
         if (btn.dataset.href) {
@@ -58,6 +65,30 @@ class Buttons {
                 button.textContent = 'Purchased';
             }
         });
+    }
+
+    private async displayInfo(product: Product) {
+        try {
+            const blur = document.createElement('div');
+            const modal = document.createElement('div');
+            const btn = document.createElement('button');
+            blur.classList.add('blur');
+            modal.classList.add('modal');
+            btn.classList.add('btn-nav');
+            btn.textContent = 'Back ↺';
+            modal.innerHTML = this.table.renderTable(product);
+            modal.appendChild(btn);
+            btn.onclick = () => {
+                this.clickSound.play();
+                document.body.removeChild(modal);
+                document.body.removeChild(blur);
+            };
+            document.body.appendChild(blur);
+            document.body.appendChild(modal);
+            this.checkStatus();
+        } catch (error) {
+            console.error(error);
+        }
     }
 }
 

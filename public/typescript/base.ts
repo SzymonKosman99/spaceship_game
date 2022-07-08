@@ -41,3 +41,5 @@ export type SettingsType =
     | 'spaceship_big'
     | 'space_mine'
     | 'player_money';
+
+export type Product = SpaceshipModel | 'space_mine' | 'destroyer_missle';
