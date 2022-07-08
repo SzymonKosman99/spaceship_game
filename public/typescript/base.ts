@@ -21,6 +21,7 @@ export const DOMElements = {
     ),
     settingsLayout: document.querySelector<HTMLDivElement>('.settings'),
     shopLayout: document.querySelector<HTMLDivElement>('.shop'),
+    wallet: document.querySelector<HTMLSpanElement>('.wallet'),
 };
 
 export type IsActive = 'active' | 'inactive';
