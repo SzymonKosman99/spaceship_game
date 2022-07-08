@@ -1,15 +1,15 @@
-import getCookieValue from '../getCookieValue';
 import { DOMElements } from '../base';
+import State from '../State';
 
 class Products {
     constructor() {}
     private products = DOMElements.products;
     public init() {
         if (this.checkItems) {
-            if (getCookieValue('spaceship_red') === 'inactive') {
+            if (State.spaceship_red === 'inactive') {
                 this.displayImages('blue');
             }
-            if (getCookieValue('spaceship_red') === 'active') {
+            if (State.spaceship_red === 'active') {
                 this.displayImages('red');
             }
         } else console.error('Not every product has been loaded');

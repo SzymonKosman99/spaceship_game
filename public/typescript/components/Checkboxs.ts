@@ -1,5 +1,5 @@
-import getCookieValue from '../getCookieValue';
 import { SpaceshipModel, SettingsType, IsActive, DOMElements } from '../base';
+import State from '../State';
 
 class Checkboxs {
     private spaceshipModel = DOMElements.spaceshipModel;
@@ -20,7 +20,7 @@ class Checkboxs {
     }
 
     private async handleClick(checkbox: HTMLInputElement) {
-        let setting = checkbox.dataset.setting as SettingsType;
+        const cookieName = checkbox.dataset.setting as SettingsType;
         let value = checkbox.dataset.value as IsActive | SpaceshipModel;
         this.clickSound.play();
 
@@ -28,16 +28,16 @@ class Checkboxs {
             const endpoint = '/settings';
             if (checkbox.checked) {
                 value = 'active';
-                await this.toggleOption(setting, value, endpoint);
+                await State.setState(cookieName, value, endpoint);
             } else {
                 value = 'inactive';
-                await this.toggleOption(setting, value, endpoint);
+                await State.setState(cookieName, value, endpoint);
             }
         }
         if (this.shopLayout) {
             const endpoint = '/game/shop';
             try {
-                await this.toggleOption(setting, value, endpoint);
+                await State.setState(cookieName, value, endpoint);
                 this.setImageAndCheckbox();
             } catch (error) {
                 console.error(error);
@@ -45,30 +45,12 @@ class Checkboxs {
         }
     }
 
-    private async toggleOption(
-        setting: SettingsType,
-        value: IsActive | SpaceshipModel,
-        endpoint: string
-    ) {
-        const data = {
-            setting,
-            value,
-        };
-        return fetch(endpoint, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({ data }),
-        });
-    }
-
     private checkStatus() {
         if (this.shopLayout) {
             this.setImageAndCheckbox();
             this.checkboxs.forEach((checkbox) => {
                 const isPurchased = checkbox.dataset.value as SpaceshipModel;
-                if (getCookieValue(isPurchased) === 'inactive') {
+                if (State.getState(isPurchased) === 'inactive') {
                     checkbox.disabled = true;
                 }
             });
@@ -76,7 +58,7 @@ class Checkboxs {
         if (this.settingsLayout) {
             this.checkboxs.forEach((checkbox) => {
                 const isSetted = checkbox.dataset.setting as IsActive;
-                if (getCookieValue(isSetted) === 'active') {
+                if (State.getState(isSetted) === 'active') {
                     checkbox.checked = true;
                 }
             });
@@ -90,14 +72,12 @@ class Checkboxs {
     }
 
     private setImageAndCheckbox() {
-        const value = getCookieValue('spaceship_model');
         const checkbox = this.checkboxs.find(
-            (checkbox) => checkbox.dataset.value === value
+            (checkbox) => checkbox.dataset.value === State.spaceship_model
         );
         checkbox.checked = true;
-        const color =
-            getCookieValue('spaceship_red') === 'active' ? 'red' : 'blue';
-        this.spaceshipModel.src = `../../images/base/${value}_${color}.png`;
+        const color = State.spaceship_red === 'active' ? 'red' : 'blue';
+        this.spaceshipModel.src = `../../images/base/${State.spaceship_model}_${color}.png`;
         this.checkboxs.forEach((input) => {
             if (checkbox !== input) {
                 input.checked = false;
