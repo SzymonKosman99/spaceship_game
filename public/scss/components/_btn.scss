@@ -46,7 +46,8 @@
 }
 
 .info,
-.settings {
+.settings,
+.modal {
     .btn-nav {
         position: absolute;
         left: 50%;
@@ -55,6 +56,10 @@
         padding: 10px 22px;
         transform: translateX(-50%);
     }
+}
+
+.modal .btn-nav {
+    top: 80%;
 }
 
 .shop {
