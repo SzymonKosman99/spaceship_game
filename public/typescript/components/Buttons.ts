@@ -1,4 +1,5 @@
 import Table from './Table';
+import Wallet from './Wallet';
 
 import { DOMElements, Product } from '../base';
 import State from '../State';
@@ -46,49 +47,68 @@ class Buttons {
 
     private checkStatus() {
         this.buttons.forEach((button) => {
+            button.dataset.price ? (button.textContent = 'buy') : null;
+            button.removeAttribute('class');
             const parentNode = button.parentNode as HTMLLIElement;
-            const product = parentNode.dataset.product;
+            const product = parentNode.dataset.product as Product;
+            const price = Number(button.dataset.price);
             if (
-                State.getState(product) === 'inactive' &&
-                button.textContent === 'buy'
+                State.getState('player_money') < price &&
+                button.textContent === 'buy' &&
+                State.getState(product) === 'inactive'
             ) {
                 button.disabled = true;
-                button.classList.remove('btn');
-                button.classList.add('btn--inactive');
+                button.classList.add('btn--unavailable');
                 button.textContent = '✗✗✗✗';
-            }
-            if (
+            } else if (
                 State.getState(product) === 'active' &&
                 button.textContent === 'buy'
             ) {
                 button.disabled = true;
+                button.classList.add('btn--inactive');
                 button.textContent = 'Purchased';
+            } else if (price) {
+                button.classList.add('btn');
+                button.addEventListener('click', () => {
+                    this.handlePurchase(price, product);
+                });
+            } else {
+                button.classList.add('btn');
             }
         });
     }
 
-    private async displayInfo(product: Product) {
+    private async handlePurchase(price: number, product: Product) {
+        const score = Number(State.player_money) - price;
+        console.log(score);
         try {
-            const blur = document.createElement('div');
-            const modal = document.createElement('div');
-            const btn = document.createElement('button');
-            blur.classList.add('blur');
-            modal.classList.add('modal');
-            btn.classList.add('btn-nav');
-            btn.textContent = 'Back ↺';
-            modal.innerHTML = this.table.renderTable(product);
-            modal.appendChild(btn);
-            btn.onclick = () => {
-                this.clickSound.play();
-                document.body.removeChild(modal);
-                document.body.removeChild(blur);
-            };
-            document.body.appendChild(blur);
-            document.body.appendChild(modal);
+            await State.setState('player_money', score, '/game/shop');
+            await State.setState(product, 'active', '/game/shop');
+            Wallet.displayMoney();
             this.checkStatus();
         } catch (error) {
-            console.error(error);
+            console.error(`Problems with purchase : ${error}`);
         }
+    }
+
+    private displayInfo(product: Product) {
+        const blur = document.createElement('div');
+        const modal = document.createElement('div');
+        const btn = document.createElement('button');
+        blur.classList.add('blur');
+        modal.classList.add('modal');
+        btn.classList.add('btn-nav');
+        btn.textContent = 'Back ↺';
+        modal.innerHTML = this.table.renderTable(product);
+        modal.appendChild(btn);
+        btn.onclick = () => {
+            State.muted_click === 'inactive' ? this.clickSound.play() : null;
+            modal.removeChild(btn);
+            document.body.removeChild(modal);
+            document.body.removeChild(blur);
+        };
+        document.body.appendChild(blur);
+        document.body.appendChild(modal);
     }
 }
 
