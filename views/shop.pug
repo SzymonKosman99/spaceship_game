@@ -5,7 +5,7 @@ block content
    .container
      .shop
        h1="Your resources: "
-         span(class="wallet")="1 000"
+         span(class="wallet")=""
        .shop__content
          .current-spaceship
            img(src="", alt="ship" data-spaceship-model) 
@@ -15,13 +15,13 @@ block content
                img(src="../skk/ll", alt="bullet" )
                .option--shop
                  p="Destroyer missle"
-               button(class="btn" data-price="")="buy"
+               button(class="btn" data-price=destroyer_missle_price)="buy"
                button(class="btn" data-info="destroyer_missle")="info"
              li(class="list__element--shop" data-product="space_mine")
                img(src="../skk/ll", alt="space mine" )
                .option--shop
                  p="Space mines"
-               button(class="btn" data-price="")="buy"
+               button(class="btn" data-price=space_mine_price)="buy"
                button(class="btn" data-info="space_mine")="info"
          section(class='shop__section--big')
            ul(class="list")
@@ -31,7 +31,7 @@ block content
                  input(type="checkbox" data-checkbox data-setting="spaceship_model" data-value='spaceship_small')
                  span(class="checkmark")
                  p="Spaceship small"
-               button(class="btn" data-price="")="buy"
+               button(class="btn" data-price="0")="buy"
                button(class="btn" data-info="spaceship_small")="info"
              li(class="list__element--shop" data-product="spaceship_big")
                img(src="../skk/ll", alt="spaceship" )
@@ -39,7 +39,7 @@ block content
                  input(type="checkbox" data-checkbox data-setting="spaceship_model" data-value='spaceship_big' )
                  span(class="checkmark")
                  p="Spaceship Big"
-               button(class="btn" data-price="")="buy"
+               button(class="btn" data-price=spaceship_big_price)="buy"
                button(class="btn" data-info="spaceship_big")="info"
              li(class="list__element--shop" data-product="spaceship_medium")
                img(src="../skk/ll", alt="spaceship")
@@ -47,7 +47,7 @@ block content
                  input(type="checkbox" data-checkbox data-setting="spaceship_model" data-value='spaceship_medium' )
                  span(class="checkmark")
                  p="Spaceship medium"
-               button(class="btn" data-price="")="buy"
+               button(class="btn" data-price=spaceship_medium_price)="buy"
                button(class="btn" data-info="spaceship_medium")="info"
          button(class="btn-nav" data-href='/game')='Play ➧'
          button(class="btn-nav" data-href='/')='Back ↺'
