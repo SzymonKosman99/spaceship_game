@@ -2,11 +2,10 @@ import { DOMElements } from '../base';
 import State from '../State';
 
 class Wallet {
-    private spn = DOMElements.wallet;
-    private player_money = State.player_money;
+    private static spn = DOMElements.wallet;
 
-    public displayMoney() {
-        this.spn.textContent = String(this.player_money);
+    public static displayMoney() {
+        this.spn.textContent = String(State.getState('player_money'));
         if (this.spn && this.spn.textContent) {
             if (this.spn.textContent.length === 4) {
                 const str1 = this.spn.textContent.slice(0, 1);
