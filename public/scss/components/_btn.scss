@@ -17,6 +17,13 @@
     box-shadow: 0 0 3px 1px $primary-white-color;
 }
 
+.btn--unavailable {
+    @include basicButtonStyle;
+    color: $primary-red-color;
+    border: 1px solid $primary-red-color;
+    box-shadow: 0 0 3px 1px $primary-red-color;
+}
+
 .btn-nav {
     position: relative;
     @include specialFontStyle();
@@ -89,7 +96,8 @@
 }
 
 .list__element--shop .btn,
-.list__element--shop .btn--inactive {
+.list__element--shop .btn--inactive,
+.list__element--shop .btn--unavailable {
     @include size(40%, 30%);
     margin: 0 2.5%;
 }
