@@ -38,6 +38,16 @@ class Checkboxs {
             const endpoint = '/game/shop';
             try {
                 await State.setState(cookieName, value, endpoint);
+                const newCookie =
+                    value === 'spaceship_small' ||
+                    value === 'spaceship_medium' ||
+                    value === 'spaceship_big'
+                        ? value
+                        : null;
+                if (newCookie) {
+                    await State.setState(newCookie, 'active', endpoint);
+                }
+
                 this.setImageAndCheckbox();
             } catch (error) {
                 console.error(error);
@@ -52,6 +62,8 @@ class Checkboxs {
                 const isPurchased = checkbox.dataset.value as SpaceshipModel;
                 if (State.getState(isPurchased) === 'inactive') {
                     checkbox.disabled = true;
+                } else {
+                    checkbox.disabled = false;
                 }
             });
         }
