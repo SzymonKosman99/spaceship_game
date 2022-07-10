@@ -8,6 +8,7 @@ class Buttons {
     private buttons = DOMElements.buttons;
     private navButtons = DOMElements.navButtons;
     private clickSound = DOMElements.clickSound;
+    private checkboxs = DOMElements.checkboxs;
     private table = new Table();
 
     public init() {
@@ -53,7 +54,7 @@ class Buttons {
             const product = parentNode.dataset.product as Product;
             const price = Number(button.dataset.price);
             if (
-                State.getState('player_money') < price &&
+                State.player_money < price &&
                 button.textContent === 'buy' &&
                 State.getState(product) === 'inactive'
             ) {
@@ -61,8 +62,10 @@ class Buttons {
                 button.classList.add('btn--unavailable');
                 button.textContent = '✗✗✗✗';
             } else if (
-                State.getState(product) === 'active' &&
-                button.textContent === 'buy'
+                (State.getState(product) === 'active' &&
+                    button.textContent === 'buy') ||
+                (State.spaceship_model === product &&
+                    button.textContent === 'buy')
             ) {
                 button.disabled = true;
                 button.classList.add('btn--inactive');
@@ -70,7 +73,9 @@ class Buttons {
             } else if (price) {
                 button.classList.add('btn');
                 button.addEventListener('click', () => {
-                    this.handlePurchase(price, product);
+                    if (this.handlePurchase(price, product)) {
+                        this.unlockInput(product);
+                    }
                 });
             } else {
                 button.classList.add('btn');
@@ -80,14 +85,15 @@ class Buttons {
 
     private async handlePurchase(price: number, product: Product) {
         const score = Number(State.player_money) - price;
-        console.log(score);
         try {
             await State.setState('player_money', score, '/game/shop');
             await State.setState(product, 'active', '/game/shop');
             Wallet.displayMoney();
             this.checkStatus();
+            return true;
         } catch (error) {
             console.error(`Problems with purchase : ${error}`);
+            return false;
         }
     }
 
@@ -109,6 +115,19 @@ class Buttons {
         };
         document.body.appendChild(blur);
         document.body.appendChild(modal);
+    }
+
+    private async unlockInput(product: Product) {
+        try {
+            await State.setState(product, 'active', '/game/shop');
+            const checkbox = this.checkboxs.find(
+                (checkbox) => checkbox.dataset.value === product
+            );
+            console.log(checkbox);
+            if (checkbox) checkbox.disabled = false;
+        } catch (error) {
+            console.log(error);
+        }
     }
 }
 
