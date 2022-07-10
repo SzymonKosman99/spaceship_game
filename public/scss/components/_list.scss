@@ -54,3 +54,8 @@
 .shop__section .list .list__element--shop {
     @include size(44%, 100%);
 }
+
+details .list .list__element {
+    font-size: 14px;
+    color: $primary-white-color;
+}
