@@ -1,0 +1,26 @@
+$bulletHeight: calc(#{$basic-unit} * 0.75);
+$bulletWidth: calc(#{$basic-unit} * 0.5);
+
+@mixin bullet {
+  @include size($bulletHeight, $bulletWidth);
+  @include imageBackgroundStyles;
+}
+
+.bullet_blue {
+  @include bullet();
+  background-image: url('../images/bullets/normal/bullet_blue.png');
+}
+
+.bullet_red {
+  @include bullet();
+  background-image: url('../images/bullets/normal/bullet_red.png');
+}
+.bullet_blue--rotated {
+  @include bullet();
+  background-image: url('../images/bullets/rotated/bullet_blue.png');
+}
+
+.bullet_red--rotated {
+  @include bullet();
+  background-image: url('../images/bullets/rotated/bullet_red.png');
+}

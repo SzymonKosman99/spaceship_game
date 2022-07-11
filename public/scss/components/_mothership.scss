@@ -1,0 +1,24 @@
+$spaceshipHeight: calc((#{$basic-unit} * 2));
+$spaceshipWidth: calc((#{$basic-unit} * 2));
+
+.mothership_blue {
+    @include size($spaceshipWidth, $spaceshipHeight);
+    @include imageBackgroundStyles;
+    animation: mothership infinite 9s linear;
+    background-image: url('../images/base/mothership_blue.png');
+}
+.mothership_red {
+    @include size($spaceshipWidth, $spaceshipHeight);
+    @include imageBackgroundStyles;
+    animation: mothership infinite 9s linear;
+    background-image: url('../images/base/mothership_red.png');
+}
+
+@keyframes mothership {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
