@@ -1,20 +1,21 @@
 .table {
-    @include size(70%, 95%);
     margin-top: 2.5%;
-    position: relative;
     padding: 1px;
-    border: 2px solid darken($color: $primary-white-color, $amount: 5);
+    @include size(70%, 95%);
+    border: 1px solid darken($color: $primary-white-color, $amount: 5);
+    background-color: darken($color: $primary-white-color, $amount: 84);
+    border-radius: 6px;
 }
 
 th,
 td {
-    background-color: $primary-dark-color;
     padding: 15px;
-    border: 2px solid $primary-white-color;
+    background-color: darken($color: $primary-white-color, $amount: 84);
     color: $primary-aqua-color;
 }
 
 td {
+    font-size: 15px;
     color: $primary-white-color;
-    text-align: center;
+    background-color: $primary-dark-color;
 }

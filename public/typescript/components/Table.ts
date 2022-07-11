@@ -7,11 +7,15 @@ class Table {
         const headers = this.getHeaders(columns);
         const body = this.getBody(product, columns, price);
 
+        const productName = (
+            product.charAt(0).toUpperCase() + product.slice(1)
+        ).replace('_', ' ');
+
         return `
     <table class='table'>
         <thead>
             <tr>
-                <th colspan="${columns}">${product.replace('_', ' ')}</th>
+                <th colspan="${columns}">${productName}</th>
             </tr>
             ${headers}
         </thead>
@@ -21,11 +25,11 @@ class Table {
 
     private getPrice(product: Product) {
         return product === 'spaceship_big'
-            ? 10000
-            : product === 'spaceship_medium'
-            ? 10000
-            : product === 'destroyer_missle'
             ? 5000
+            : product === 'spaceship_medium'
+            ? 5000
+            : product === 'destroyer_missle'
+            ? 7000
             : product === 'space_mine'
             ? 1000
             : 'this product is purchased by default';
@@ -35,10 +39,10 @@ class Table {
         if (columns === 4) {
             return `
             <tr>
-                <th style="width:15%">Price</th>
-                <th style="width:5%">Lives</th>
-                <th style="width:5%">Speed</th>
-                <th style="width:75%">Description</th>                      
+                <th style="width:15%">price</th>
+                <th style="width:5%">lives</th>
+                <th style="width:5%">speed</th>
+                <th style="width:75%">description</th>                      
             </tr>            
             `;
         } else {
@@ -113,13 +117,13 @@ class Table {
     }
     private getSpeed(product: Product) {
         if (product === 'spaceship_medium') {
-            return 4.5;
+            return 5.5;
         }
         if (product === 'spaceship_big') {
-            return 3.5;
+            return 5;
         }
         if (product === 'spaceship_small') {
-            return 3.5;
+            return 5;
         }
     }
 }
