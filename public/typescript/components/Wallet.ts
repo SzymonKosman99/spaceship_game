@@ -19,7 +19,7 @@ class Wallet {
                 const str1 = this.spn.textContent.slice(0, 3);
                 const str2 = this.spn.textContent.slice(3, 6);
                 this.spn.textContent = str1.concat(' ', str2) + ' $';
-            }
+            } else this.spn.textContent += ' $';
         } else throw Error('span wallet not has been loaded');
     }
 }

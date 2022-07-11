@@ -84,7 +84,8 @@ class Buttons {
     }
 
     private async handlePurchase(price: number, product: Product) {
-        const score = Number(State.player_money) - price;
+        let score = Number(State.player_money) - price;
+        score = score === 0 ? 1 : score;
         try {
             await State.setState('player_money', score, '/game/shop');
             await State.setState(product, 'active', '/game/shop');
@@ -123,7 +124,6 @@ class Buttons {
             const checkbox = this.checkboxs.find(
                 (checkbox) => checkbox.dataset.value === product
             );
-            console.log(checkbox);
             if (checkbox) checkbox.disabled = false;
         } catch (error) {
             console.log(error);
