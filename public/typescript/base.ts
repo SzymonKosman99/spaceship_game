@@ -2,6 +2,7 @@ export const DOMElements = {
     arrowPrev: document.querySelector<HTMLDivElement>('.slider__prev'),
     arrowNext: document.querySelector<HTMLDivElement>('.slider__next'),
     buttons: Array.from(document.querySelectorAll<HTMLButtonElement>('.btn')),
+    backgroundSound: document.querySelector<HTMLAudioElement>('#bgc-sound'),
     clickSound: document.querySelector<HTMLAudioElement>('[data-click]'),
     checkboxs: Array.from(
         document.querySelectorAll<HTMLInputElement>('[data-checkbox]')
@@ -13,9 +14,12 @@ export const DOMElements = {
     navButtons: Array.from(
         document.querySelectorAll<HTMLButtonElement>('.btn-nav')
     ),
+    gameField: document.querySelector<HTMLDivElement>('.game-field'),
+    infoLayout: document.querySelector<HTMLDivElement>('.info'),
     products: Array.from(
         document.querySelectorAll<HTMLImageElement>('[data-product] img')
     ),
+    startLayout: document.querySelector<HTMLDivElement>('.start'),
     slides: Array.from(
         document.querySelectorAll<HTMLDivElement>('.slider__content')
     ),
