@@ -100,4 +100,5 @@
 .list__element--shop .btn--unavailable {
     @include size(40%, 30%);
     margin: 0 2.5%;
+    font-size: 15px;
 }
