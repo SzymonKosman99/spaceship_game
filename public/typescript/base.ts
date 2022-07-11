@@ -6,6 +6,9 @@ export const DOMElements = {
     checkboxs: Array.from(
         document.querySelectorAll<HTMLInputElement>('[data-checkbox]')
     ),
+    details: Array.from(
+        document.querySelectorAll<HTMLDetailsElement>('details')
+    ),
     dots: Array.from(document.querySelectorAll<HTMLSpanElement>('.dot')),
     navButtons: Array.from(
         document.querySelectorAll<HTMLButtonElement>('.btn-nav')
