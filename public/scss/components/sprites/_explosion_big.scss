@@ -1,0 +1,25 @@
+$explosionHeight: calc((#{$basic-unit} * 2));
+$explosionWidth: calc((#{$basic-unit} * 2));
+
+@mixin explosion_big {
+    @include size($explosionHeight, $explosionWidth);
+    @include imageBackgroundStyles();
+    animation: explosion_big 1 forwards 0.8s steps(17);
+}
+
+@keyframes explosion_big {
+    from {
+        background-position-y: 0px;
+    }
+    to {
+        background-position-y: calc(-17 * #{$explosionHeight});
+    }
+}
+.explosion_big_red {
+    @include explosion_big();
+    background-image: url('../images/sprites/red_explosions/red_explosion_big.png');
+}
+.explosion_big_blue {
+    @include explosion_big();
+    background-image: url('../images/sprites/blue_explosions/blue_explosion_big.png');
+}

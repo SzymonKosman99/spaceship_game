@@ -1,0 +1,22 @@
+@mixin explosion_small {
+    @include size($basic-unit, $basic-unit);
+    @include imageBackgroundStyles();
+    animation: explosion_small 1 forwards 1s steps(17);
+}
+
+@keyframes explosion_small {
+    from {
+        background-position-y: 0px;
+    }
+    to {
+        background-position-y: calc(-17 * #{$basic-unit});
+    }
+}
+.explosion_small_red {
+    @include explosion_small();
+    background-image: url('../images/sprites/red_explosions/red_explosion_small.png');
+}
+.explosion_small_blue {
+    @include explosion_small();
+    background-image: url('../images/sprites/blue_explosions/blue_explosion_small.png');
+}
