@@ -1,0 +1,35 @@
+$spaceshipHeight: calc((#{$basic-unit} * 2));
+$spaceshipWidth: calc((#{$basic-unit} * 2));
+
+@mixin big-ship {
+  @include size($spaceshipHeight, $spaceshipWidth);
+  @include imageBackgroundStyles;
+  animation: spaceship-big infinite forwards 0.3s steps(8);
+}
+
+@keyframes spaceship-big {
+  from {
+    background-position-y: 0px;
+  }
+  to {
+    background-position-y: calc(-8 * (#{$spaceshipHeight}));
+  }
+}
+
+.spaceship_big_blue {
+  @include big-ship();
+  background-image: url('../images/sprites/normal/blue_spaceships/spaceship_big.png')
+}
+
+.spaceship_big_red {
+  @include big-ship();
+  background-image: url('../images/sprites/normal/red_spaceships/spaceship_big.png')
+}
+.spaceship_big_blue--rotated {
+  @include big-ship();
+  background-image: url('../images/sprites/rotated/blue_spaceships/spaceship_big.png')
+}
+.spaceship_big_red--rotated {
+  @include big-ship();
+  background-image: url('../images/sprites/rotated/red_spaceships/spaceship_big.png')
+}
