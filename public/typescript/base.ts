@@ -51,3 +51,65 @@ export type SettingsType =
     | 'player_money';
 
 export type Product = SpaceshipModel | 'space_mine' | 'destroyer_missle';
+
+//Game field
+
+export type SpaceshipClass =
+    | 'spaceship_small_blue'
+    | 'spaceship_small_red'
+    | 'spaceship_small_blue--rotated'
+    | 'spaceship_small_red--rotated'
+    | 'spaceship_medium_blue'
+    | 'spaceship_medium_red'
+    | 'spaceship_medium_blue--rotated'
+    | 'spaceship_medium_red--rotated'
+    | 'spaceship_big_blue'
+    | 'spaceship_big_red'
+    | 'spaceship_big_blue--rotated'
+    | 'spaceship_big_red--rotated'
+    | 'mothership_blue'
+    | 'mothership_red';
+
+export type BulletClass =
+    | 'bullet_blue'
+    | 'bullet_blue'
+    | 'bullet_blue--rotated'
+    | 'bullet_red--rotated ';
+
+export type ExplosionClass =
+    | 'explosion_small_red'
+    | 'explosion_small_blue'
+    | 'explosion_big_red'
+    | 'explosion_big_blue';
+
+export type ElementPosition = {
+    edgeLeft: number;
+    edgeRight: number;
+} & ({ topEdge: number } | { bottomEdge: number });
+
+export type EnemySmall = {
+    spaceshipClass: SpaceshipClass;
+    explosionClass: ExplosionClass;
+    lives: 1;
+    speed: 5;
+};
+
+export type EnemyMedium = {
+    spaceshipClass: SpaceshipClass;
+    explosionClass: ExplosionClass;
+    lives: 2;
+    speed: 5;
+};
+
+export type EnemyBig = {
+    spaceshipClass: SpaceshipClass;
+    explosionClass: ExplosionClass;
+    lives: 3;
+    speed: 4;
+};
+export type Mothership = {
+    spaceshipClass: SpaceshipClass;
+    explosionClass: ExplosionClass;
+    lives: 6;
+    speed: 4;
+};
