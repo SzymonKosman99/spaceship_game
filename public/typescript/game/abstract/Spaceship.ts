@@ -1,4 +1,5 @@
 import { SpaceshipClass, ExplosionClass, ElementPosition } from '../../base';
+import Bullet from './Bullet';
 
 export default abstract class Spaceship {
     protected abstract spaceshipClass: SpaceshipClass;
@@ -13,4 +14,5 @@ export default abstract class Spaceship {
     protected abstract movePosition(): void | number;
     protected abstract getPosition(): ElementPosition;
     public abstract explode(): void;
+    public abstract remove(): void;
 }
