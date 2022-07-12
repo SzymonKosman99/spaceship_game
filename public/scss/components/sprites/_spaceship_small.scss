@@ -1,6 +1,6 @@
 @mixin small-ship {
-    @include imageBackgroundStyles();
     @include size($basic-unit, $basic-unit);
+    @include imageBackgroundStyles();
     animation: spaceship-small infinite forwards 0.3s steps(5);
 }
 
@@ -15,21 +15,18 @@
 
 .spaceship_small_blue {
     @include small-ship();
-    @include imageBackgroundStyles();
     background-image: url('../images/sprites/normal/blue_spaceships/spaceship_small.png');
 }
+
 .spaceship_small_red {
     @include small-ship();
-    @include imageBackgroundStyles();
     background-image: url('../images/sprites/normal/red_spaceships/spaceship_small.png');
 }
 .spaceship_small_blue--rotated {
     @include small-ship();
-    @include imageBackgroundStyles();
     background-image: url('../images/sprites/rotated/blue_spaceships/spaceship_small.png');
 }
 .spaceship_small_red--rotated {
     @include small-ship();
-    @include imageBackgroundStyles();
     background-image: url('../images/sprites/rotated/red_spaceships/spaceship_small.png');
 }
