@@ -1,20 +1,56 @@
-import { IsActive, SpaceshipModel, SettingsType } from './base';
-import getCookieValue from './getCookieValue';
+import { IsActive, SpaceshipModel, SettingsType, GameState } from './base';
 
 class State {
-    static muted_click = getCookieValue('muted_click') as IsActive;
-    static muted_background = getCookieValue('muted_background') as IsActive;
-    static destroyer_missle = getCookieValue('destroyer_missle') as IsActive;
-    static spaceship_red = getCookieValue('spaceship_red') as IsActive;
-    static spaceship_model = getCookieValue(
+    private static getCookieValue = (name: string) => {
+        let cookieValue: string | undefined = undefined;
+        const allcookies = document.cookie;
+        const array = allcookies.split(';');
+        array.forEach((cookie) => {
+            if (cookie.includes(name)) {
+                const index = cookie.indexOf('=');
+                const string = cookie.slice(index + 1);
+                cookieValue = string;
+            }
+        });
+        return cookieValue;
+    };
+
+    static muted_click = State.getCookieValue('muted_click') as IsActive;
+    static muted_background = State.getCookieValue(
+        'muted_background'
+    ) as IsActive;
+    static destroyer_missle = State.getCookieValue(
+        'destroyer_missle'
+    ) as IsActive;
+    static spaceship_red = State.getCookieValue('spaceship_red') as IsActive;
+    static spaceship_model = State.getCookieValue(
         'spaceship_model'
     ) as SpaceshipModel;
 
-    static spaceship_small = getCookieValue('spaceship_small') as IsActive;
-    static spaceship_big = getCookieValue('spaceship_big') as IsActive;
-    static spaceship_medium = getCookieValue('spaceship_medium') as IsActive;
-    static space_mine = getCookieValue('space_mine') as IsActive;
-    static player_money: Number = parseInt(getCookieValue('player_money'), 10);
+    static spaceship_small = State.getCookieValue(
+        'spaceship_small'
+    ) as IsActive;
+    static spaceship_big = State.getCookieValue('spaceship_big') as IsActive;
+    static spaceship_medium = State.getCookieValue(
+        'spaceship_medium'
+    ) as IsActive;
+    static space_mine = State.getCookieValue('space_mine') as IsActive;
+    static player_money: Number = parseInt(
+        State.getCookieValue('player_money'),
+        10
+    );
+
+    static gameState = {
+        player_money: 0,
+        player_lives: 0,
+        player_bullets: [],
+        player_mines: [],
+        enemy_bullets: [],
+        enemy_spaceships: [],
+        destroyedEnemies: 0,
+        isGameOver: false,
+        hittedBy: '',
+    } as GameState;
 
     public static async setState(
         cookieName: SettingsType,

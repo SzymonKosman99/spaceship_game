@@ -1,7 +1,11 @@
+import Bullet from './game/abstract/Bullet';
+import Spaceship from './game/abstract/Spaceship';
+
 export const DOMElements = {
     arrowPrev: document.querySelector<HTMLDivElement>('.slider__prev'),
     arrowNext: document.querySelector<HTMLDivElement>('.slider__next'),
     buttons: Array.from(document.querySelectorAll<HTMLButtonElement>('.btn')),
+    blastSound: document.querySelector<HTMLAudioElement>('[data-blast]'),
     backgroundSound: document.querySelector<HTMLAudioElement>('#bgc-sound'),
     clickSound: document.querySelector<HTMLAudioElement>('[data-click]'),
     checkboxs: Array.from(
@@ -112,4 +116,14 @@ export type Mothership = {
     explosionClass: ExplosionClass;
     lives: 6;
     speed: 4;
+};
+
+export type GameState = {
+    player_lives: number;
+    player_mines: unknown;
+    player_bullets: Bullet[];
+    enemy_bullets: Bullet[];
+    enemy_spaceships: Spaceship[];
+    isGameOver: boolean;
+    hittedBy: '' | 'bullet' | 'spaceship';
 };
