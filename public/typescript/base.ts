@@ -75,10 +75,10 @@ export type SpaceshipClass =
     | 'mothership_red';
 
 export type BulletClass =
-    | 'bullet_blue'
+    | 'bullet_red'
     | 'bullet_blue'
     | 'bullet_blue--rotated'
-    | 'bullet_red--rotated ';
+    | 'bullet_red--rotated';
 
 export type ExplosionClass =
     | 'explosion_small_red'
@@ -89,7 +89,9 @@ export type ExplosionClass =
 export type ElementPosition = {
     edgeLeft: number;
     edgeRight: number;
-} & ({ topEdge: number } | { bottomEdge: number });
+    topEdge?: number;
+    bottomEdge?: number;
+};
 
 export type EnemySmall = {
     spaceshipClass: SpaceshipClass;
