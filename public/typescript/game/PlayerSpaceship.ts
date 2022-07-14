@@ -1,7 +1,3 @@
-import Spaceship from './abstract/Spaceship';
-import PlayerBullet from './PlayerBullet';
-import State from '../State';
-
 import {
     DOMElements,
     SpaceshipClass,
@@ -10,7 +6,13 @@ import {
     BulletClass,
 } from '../base';
 
-const { blastSound } = DOMElements;
+import BulletFactory from './BulletsFactory';
+
+import State from '../State';
+import Spaceship from './abstract/Spaceship';
+
+const { blastSound, gameField } = DOMElements;
+const { gameState } = State;
 
 class PlayerSpaceship extends Spaceship {
     constructor(
@@ -21,10 +23,11 @@ class PlayerSpaceship extends Spaceship {
         protected spaceship: HTMLDivElement = document.createElement('div'),
         private isArrowLeftPressed = false,
         private isArrowRightPressed = false,
-        private translatePositionX = 0,
-        private counter = 0
+        private translatePositionX = 0
     ) {
         super();
+        gameState.player_lives = this.lives;
+        gameState.player_bullets = [];
     }
 
     public init(): void {
@@ -118,13 +121,12 @@ class PlayerSpaceship extends Spaceship {
     private shot() {
         const color = State.spaceship_red === 'active' ? '_red' : '_blue';
         const bulletClass = `bullet${color}` as BulletClass;
-        const playerBullet = new PlayerBullet(
+        BulletFactory.createBullet(
             bulletClass,
             this.explosionClass,
-            6,
-            document.createElement('div')
+            this.speed,
+            this.getPosition()
         );
-        playerBullet.init(this.getPosition());
     }
 
     public explode(): void {
@@ -146,6 +148,19 @@ class PlayerSpaceship extends Spaceship {
     private removeEvents() {
         document.removeEventListener('keydown', this.handleKeyDown);
         document.removeEventListener('keyup', this.handleKeyUp);
+    }
+
+    public updateLives(lifeTaken: number): number {
+        const colorRed = 'rgb(204, 25, 25)';
+        if (gameField) {
+            gameField.style.backgroundColor = colorRed;
+            setTimeout(() => {
+                gameField
+                    ? (gameField.style.backgroundColor = 'transparent')
+                    : null;
+            }, 50);
+        }
+        return (gameState.player_lives -= lifeTaken);
     }
 }
 
