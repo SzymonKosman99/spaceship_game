@@ -115,11 +115,10 @@ class EnemySpaceship extends Spaceship {
             this.randomPosition() > window.innerWidth / 2 &&
             this.spaceshipClass === requiredModel
         ) {
-            const speed = 2;
             BulletFactory.createBullet(
                 `bullet${color}--rotated`,
                 this.explosionClass,
-                speed,
+                this.speed / 2,
                 this.getPosition()
             );
         }
