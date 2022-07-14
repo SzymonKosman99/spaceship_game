@@ -1,0 +1,129 @@
+import {
+    ExplosionClass,
+    SpaceshipClass,
+    ElementPosition,
+    DOMElements,
+} from '../base';
+
+import BulletFactory from './BulletsFactory';
+
+import Spaceship from './abstract/Spaceship';
+import State from '../State';
+
+class EnemySpaceship extends Spaceship {
+    constructor(
+        protected spaceshipClass: SpaceshipClass,
+        protected explosionClass: ExplosionClass,
+        protected lives: number,
+        protected speed: number,
+        protected spaceship = document.createElement('div'),
+        private translatePositionY = 0,
+        private translatePositionX = 0
+    ) {
+        super();
+    }
+    public init(): void {
+        this.spaceship.setAttribute('class', this.spaceshipClass);
+        DOMElements.gameField.appendChild(this.spaceship);
+        this.setPosition();
+    }
+
+    protected setPosition(): void {
+        this.spaceship.style.position = 'absolute';
+        this.spaceship.style.top = '0%';
+        this.spaceship.style.left = `${this.randomPosition()}px`;
+        this.spaceship.style.transform = `translate(${this.checkPositionX()}px,${
+            this.translatePositionY
+        }px)`;
+    }
+    protected movePosition(): number | void {
+        this.translatePositionY += this.speed;
+        this.spaceship.style.transform = `translate(${this.checkPositionX()}px,${
+            this.translatePositionY
+        }px)`;
+    }
+
+    public getPosition(): ElementPosition {
+        return {
+            edgeLeft: this.spaceship.offsetLeft + this.translatePositionX,
+
+            edgeRight:
+                this.spaceship.offsetLeft +
+                this.spaceship.offsetWidth +
+                this.translatePositionX,
+
+            bottomEdge:
+                this.spaceship.offsetTop +
+                this.spaceship.offsetHeight +
+                this.translatePositionY,
+        };
+    }
+
+    public explode(): void {
+        clearInterval(this.updateTranslatePositionY);
+        clearInterval(this.shot);
+        this.spaceship.classList.remove(this.spaceshipClass);
+        this.spaceship.classList.add(this.explosionClass);
+        setTimeout(() => {
+            this.spaceship.remove();
+        }, 600);
+    }
+
+    private randomPosition(): number {
+        return Math.floor(Math.random() * window.innerWidth);
+    }
+
+    private checkPositionX() {
+        if (
+            this.spaceship.offsetLeft >
+            window.innerWidth - this.spaceship.offsetWidth
+        ) {
+            return (this.translatePositionX = -this.spaceship.offsetWidth);
+        }
+        if (this.spaceship.offsetLeft < this.spaceship.offsetWidth) {
+            return (this.translatePositionX = this.spaceship.offsetWidth / 6);
+        }
+        return this.translatePositionX;
+    }
+
+    public updateLives(lifeTaken: number): number {
+        return (this.lives -= lifeTaken);
+    }
+
+    public getLives() {
+        return this.lives;
+    }
+
+    private updateTranslatePositionY = setInterval(() => {
+        requestAnimationFrame(this.movePosition.bind(this));
+    }, 50);
+
+    public remove(): void {
+        clearInterval(this.updateTranslatePositionY);
+        this.spaceship.remove();
+    }
+
+    private shot = setInterval(() => {
+        const color = State.spaceship_red === 'active' ? '_blue' : '_red';
+        const requiredModel =
+            `mothership${color}` ||
+            `mothership${color}` ||
+            `spaceship_big${color}--rotated` ||
+            `spaceship_big${color}--rotated`;
+
+        if (
+            this.randomPosition() > window.innerWidth / 2 &&
+            this.spaceshipClass === requiredModel
+        ) {
+            const speed = 2;
+            BulletFactory.createBullet(
+                `bullet${color}--rotated`,
+                this.explosionClass,
+                speed,
+                this.getPosition()
+            );
+        }
+    }, 1500);
+}
+
+export default EnemySpaceship;
