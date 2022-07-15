@@ -105,15 +105,11 @@ class EnemySpaceship extends Spaceship {
 
     private shot = setInterval(() => {
         const color = State.spaceship_red === 'active' ? '_blue' : '_red';
-        const requiredModel =
-            `mothership${color}` ||
-            `mothership${color}` ||
-            `spaceship_big${color}--rotated` ||
-            `spaceship_big${color}--rotated`;
 
         if (
-            this.randomPosition() > window.innerWidth / 2 &&
-            this.spaceshipClass === requiredModel
+            (this.randomPosition() > window.innerWidth / 2 &&
+                this.spaceshipClass === `spaceship_big${color}--rotated`) ||
+            this.spaceshipClass === `mothership${color}`
         ) {
             BulletFactory.createBullet(
                 `bullet${color}--rotated`,

@@ -60,7 +60,7 @@ export default class EnemyBullet extends Bullet {
         clearInterval(this.updateTranslatePositionY);
         this.bullet.classList.remove(this.bulletClass);
         this.bullet.classList.add(this.explosionClass);
-        this.translatePositionY += this.bullet.offsetWidth / 2;
+        this.translatePositionY -= this.bullet.offsetHeight / 4;
         this.translatePositionX = -this.bullet.offsetWidth / 2;
         this.setTranslatePositions();
         setTimeout(() => {
