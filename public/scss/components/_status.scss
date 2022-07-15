@@ -1,0 +1,49 @@
+@mixin status {
+    font-size: 15px;
+    position: absolute;
+    top: 0%;
+    z-index: 3;
+    font-weight: 700;
+    color: lighten($color: $primary-aqua-color, $amount: 25);
+}
+
+.status--player_lives {
+    @include status();
+    @include size(2%, 10%);
+    left: calc(90%);
+    transform: translate(-10%, 10px);
+    display: flex;
+    justify-content: flex-start;
+    overflow: hidden;
+    border: 2px solid $primary-white-color;
+    border-radius: 7px;
+    .live {
+        background-color: darken($color: $primary-red-color, $amount: 5);
+    }
+}
+
+.status--destroyed_enemies {
+    @include status();
+    @include specialFontStyle();
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 10px;
+    left: 0%;
+    letter-spacing: 1px;
+    .number {
+        margin-left: 5px;
+        letter-spacing: 3px;
+    }
+}
+
+.lives_precent {
+    @include size(2%, 4%);
+    position: absolute;
+    font-size: 13px;
+    letter-spacing: 1px;
+    top: 0%;
+    font-weight: 700;
+    left: calc(87.5%);
+    transform: translate(-70%, 10px);
+}
