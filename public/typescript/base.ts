@@ -1,5 +1,8 @@
 import Bullet from './game/abstract/Bullet';
-import Spaceship from './game/abstract/Spaceship';
+import EnemyBullet from './game/EnemyBullet';
+import EnemySpaceship from './game/EnemySpaceship';
+import PlayerBullet from './game/PlayerBullet';
+import PlayerSpaceship from './game/PlayerSpaceship';
 
 export const DOMElements = {
     arrowPrev: document.querySelector<HTMLDivElement>('.slider__prev'),
@@ -22,6 +25,13 @@ export const DOMElements = {
     infoLayout: document.querySelector<HTMLDivElement>('.info'),
     products: Array.from(
         document.querySelectorAll<HTMLImageElement>('[data-product] img')
+    ),
+    lives_precent: document.querySelector<HTMLDivElement>('.lives_precent'),
+    statusPlayerLives: document.querySelector<HTMLSpanElement>(
+        '.status--player_lives'
+    ),
+    statusDestroyedEnemies: document.querySelector<HTMLSpanElement>(
+        '.status--destroyed_enemies'
     ),
     startLayout: document.querySelector<HTMLDivElement>('.start'),
     slides: Array.from(
@@ -121,11 +131,13 @@ export type Mothership = {
 };
 
 export type GameState = {
+    player_spaceship: PlayerSpaceship | null;
     player_lives: number;
     player_mines: unknown;
-    player_bullets: Bullet[];
-    enemy_bullets: Bullet[];
-    enemy_spaceships: Spaceship[];
+    player_bullets: PlayerBullet[];
+    enemy_bullets: EnemyBullet[];
+    enemy_spaceships: EnemySpaceship[];
+    destroyed_enemies: number;
     isGameOver: boolean;
     hittedBy: '' | 'bullet' | 'spaceship';
 };

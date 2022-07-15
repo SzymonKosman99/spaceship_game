@@ -41,13 +41,14 @@ class State {
     );
 
     static gameState = {
+        player_spaceship: null,
         player_money: 0,
         player_lives: 0,
         player_bullets: [],
         player_mines: [],
         enemy_bullets: [],
         enemy_spaceships: [],
-        destroyedEnemies: 0,
+        destroyed_enemies: 0,
         isGameOver: false,
         hittedBy: '',
     } as GameState;
