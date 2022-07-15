@@ -27,9 +27,7 @@ export const DOMElements = {
         document.querySelectorAll<HTMLImageElement>('[data-product] img')
     ),
     lives_precent: document.querySelector<HTMLDivElement>('.lives_precent'),
-    statusPlayerLives: document.querySelector<HTMLSpanElement>(
-        '.status--player_lives'
-    ),
+    life_bar: document.querySelector<HTMLSpanElement>('.status--player_lives'),
     statusDestroyedEnemies: document.querySelector<HTMLSpanElement>(
         '.status--destroyed_enemies'
     ),

@@ -11,7 +11,12 @@ import BulletFactory from './BulletsFactory';
 import State from '../State';
 import Spaceship from './abstract/Spaceship';
 
-const { blastSound, gameField } = DOMElements;
+const {
+    blastSound,
+    gameField,
+    life_bar: life_bar,
+    lives_precent,
+} = DOMElements;
 const { gameState } = State;
 
 class PlayerSpaceship extends Spaceship {
@@ -23,9 +28,10 @@ class PlayerSpaceship extends Spaceship {
         protected spaceship: HTMLDivElement = document.createElement('div'),
         private isArrowLeftPressed = false,
         private isArrowRightPressed = false,
-        private translatePositionX = 0
+        protected translatePositionX = 0
     ) {
         super();
+        gameState.player_spaceship = this;
         gameState.player_lives = this.lives;
         gameState.player_bullets = [];
     }
@@ -35,6 +41,7 @@ class PlayerSpaceship extends Spaceship {
         this.spaceship.classList.add(this.spaceshipClass);
         this.setPosition();
         this.addEvents();
+        this.setLivesBar();
     }
 
     protected setPosition(): void {
@@ -46,7 +53,7 @@ class PlayerSpaceship extends Spaceship {
         this.spaceship.style.transform = `translateX(${this.translatePositionX}px)`;
     }
 
-    protected getPosition(): ElementPosition {
+    public getPosition(): ElementPosition {
         return {
             edgeLeft: this.spaceship.offsetLeft + this.translatePositionX,
             edgeRight:
@@ -155,12 +162,33 @@ class PlayerSpaceship extends Spaceship {
         if (gameField) {
             gameField.style.backgroundColor = colorRed;
             setTimeout(() => {
-                gameField
-                    ? (gameField.style.backgroundColor = 'transparent')
-                    : null;
+                gameField.style.backgroundColor = 'transparent';
             }, 50);
         }
-        return (gameState.player_lives -= lifeTaken);
+        gameState.player_lives -= lifeTaken;
+        this.setLivesBar();
+        return gameState.player_lives;
+    }
+
+    private setLivesBar() {
+        life_bar.innerHTML = '';
+
+        let lifePrecent = 0;
+        const oneBarWidth = (life_bar.offsetWidth / this.lives).toFixed(1);
+        const oneBarPrecent = (
+            (Number(oneBarWidth) / life_bar.offsetWidth) *
+            100
+        ).toFixed(1);
+
+        for (let i = 0; i < gameState.player_lives; i++) {
+            const bar = document.createElement('div');
+            bar.style.width = oneBarWidth + 'px';
+            bar.setAttribute('class', 'live');
+
+            life_bar.appendChild(bar);
+            lifePrecent += Number(oneBarPrecent);
+        }
+        lives_precent.textContent = `${lifePrecent.toFixed(0)} %`;
     }
 }
 
