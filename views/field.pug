@@ -3,4 +3,8 @@ extends layout
 block content
   .container
     .game-field
+      .lives_precent="100%"
+      span(class="status--player_lives")
+      span(class="status--destroyed_enemies")="Destroyed enemies : "
+        .number=" 0"
     script(src="http://localhost:5000/public/dist/bundle.js")
