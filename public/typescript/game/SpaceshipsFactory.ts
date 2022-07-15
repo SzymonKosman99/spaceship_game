@@ -53,11 +53,11 @@ class SpaceshipsFactory {
         const lives =
             spaceshipClass === `mothership${color}`
                 ? 6
-                : spaceshipClass === `spaceship_big${color}`
+                : spaceshipClass === `spaceship_big${color}--rotated`
                 ? 3
-                : spaceshipClass === `spaceship_medium${color}`
+                : spaceshipClass === `spaceship_medium${color}--rotated`
                 ? 2
-                : spaceshipClass === `spaceship_small${color}`
+                : spaceshipClass === `spaceship_small${color}--rotated`
                 ? 1
                 : 1;
 
@@ -79,7 +79,7 @@ class SpaceshipsFactory {
             speed
         );
         newEnemy.init();
-        return newEnemy;
+        State.gameState.enemy_spaceships.push(newEnemy);
     }
 
     private static drawModel() {
@@ -97,7 +97,7 @@ class SpaceshipsFactory {
     ): ExplosionClass {
         return (
             spaceshipClass === `mothership${color}` ||
-            spaceshipClass === `spaceship_big${color}`
+            spaceshipClass === `spaceship_big${color}--rotated`
                 ? `explosion_big${color}`
                 : `explosion_small${color}`
         ) as ExplosionClass;
