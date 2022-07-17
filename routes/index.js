@@ -10,6 +10,7 @@ router.get('/', (req, res, next) => {
     ) {
         res.cookie('muted_click', 'inactive');
         res.cookie('muted_background', 'inactive');
+        res.cookie('max_enemy_number', '10');
         res.cookie('destroyer_missle', 'inactive');
         res.cookie('spaceship_red', 'inactive');
         res.cookie('spaceship_model', 'spaceship_small');
