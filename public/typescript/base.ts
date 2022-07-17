@@ -130,12 +130,14 @@ export type Mothership = {
 
 export type GameState = {
     player_spaceship: PlayerSpaceship | null;
+    player_money: number;
     player_lives: number;
-    player_mines: unknown;
     player_bullets: PlayerBullet[];
+    player_mines: unknown;
+    max_enemy_number: number;
     enemy_bullets: EnemyBullet[];
     enemy_spaceships: EnemySpaceship[];
     destroyed_enemies: number;
-    isGameOver: boolean;
+    is_game_won: boolean;
     hittedBy: '' | 'bullet' | 'spaceship';
 };

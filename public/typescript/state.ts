@@ -42,14 +42,15 @@ class State {
 
     static gameState = {
         player_spaceship: null,
-        player_money: 0,
+        player_money: State.player_money,
         player_lives: 0,
         player_bullets: [],
         player_mines: [],
+        max_enemy_number: Number(State.getCookieValue('max_enemy_number')),
         enemy_bullets: [],
         enemy_spaceships: [],
         destroyed_enemies: 0,
-        isGameOver: false,
+        is_game_won: false,
         hittedBy: '',
     } as GameState;
 
