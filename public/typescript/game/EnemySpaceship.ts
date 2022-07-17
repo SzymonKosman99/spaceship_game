@@ -26,6 +26,12 @@ class EnemySpaceship extends Spaceship {
         this.spaceship.setAttribute('class', this.spaceshipClass);
         DOMElements.gameField.appendChild(this.spaceship);
         this.setPosition();
+        if (
+            this.spaceshipClass.includes('small') ||
+            this.spaceshipClass.includes('medium')
+        ) {
+            clearInterval(this.shot);
+        }
     }
 
     protected setPosition(): void {
@@ -99,6 +105,7 @@ class EnemySpaceship extends Spaceship {
     }, 50);
 
     public remove(): void {
+        clearInterval(this.shot);
         clearInterval(this.updateTranslatePositionY);
         this.spaceship.remove();
     }
