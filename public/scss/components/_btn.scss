@@ -65,8 +65,26 @@
     }
 }
 
+.modal,
 .modal .btn-nav {
     top: 80%;
+}
+
+.modal--game .btn-nav {
+    position: absolute;
+    top: 80%;
+    padding: 10px 20px;
+}
+
+.modal--game {
+    .btn-nav:nth-last-child(1) {
+        left: 50%;
+        transform: translateX(-120%);
+    }
+    .btn-nav:nth-last-child(2) {
+        left: 50%;
+        transform: translateX(20%);
+    }
 }
 
 .shop {

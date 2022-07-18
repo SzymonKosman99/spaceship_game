@@ -1,4 +1,4 @@
-.modal {
+@mixin modalStyle {
     @include size(65%, 70%);
     @include positionCenter;
     @include borderWithShadow();
@@ -9,6 +9,10 @@
     align-items: center;
     border-radius: 10px;
     background-color: $primary-dark-color;
+}
+
+.modal {
+    @include modalStyle();
     @media (orientation: portrait) and (min-width: 912px) {
         @include size(50%, 60%);
         h3 {
@@ -18,5 +22,25 @@
         p {
             padding: 10px;
         }
+    }
+}
+
+.modal--game {
+    position: relative;
+    @include modalStyle();
+    color: $primary-white-color;
+    &__element,
+    .wallet {
+        @include size(10%, 40%);
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        letter-spacing: 1px;
+    }
+    h3 {
+        margin: 5%;
+        text-align: center;
+        @include size(10%, 100%);
+        font-size: 30px;
     }
 }
