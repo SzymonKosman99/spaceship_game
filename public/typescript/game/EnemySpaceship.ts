@@ -70,6 +70,7 @@ class EnemySpaceship extends Spaceship {
         clearInterval(this.shot);
         this.spaceship.classList.remove(this.spaceshipClass);
         this.spaceship.classList.add(this.explosionClass);
+        State.gameState.player_money += 100;
         setTimeout(() => {
             this.spaceship.remove();
         }, 600);
