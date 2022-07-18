@@ -1,0 +1,12 @@
+.space_mine_blue,
+.space_mine_red {
+    @include size($basic-unit, $basic-unit);
+    @include imageBackgroundStyles();
+}
+
+.space_mine_blue {
+    background-image: url('../images/sprites/space_mines/space_mine_blue.png');
+}
+.space_mine_red {
+    background-image: url('../images/sprites/space_mines/space_mine_red.png');
+}

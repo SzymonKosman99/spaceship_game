@@ -1,0 +1,15 @@
+.destroyer_missle {
+    @include size($basic-unit, $basic-unit);
+    @include imageBackgroundStyles;
+    background-image: url('../images/sprites/destroyer_missle.png');
+    animation: moves 0.3s infinite steps(15);
+}
+
+@keyframes moves {
+    from {
+        background-position-y: 0px;
+    }
+    to {
+        background-position-y: calc(-15 * #{$basic-unit});
+    }
+}
