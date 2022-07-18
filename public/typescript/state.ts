@@ -42,7 +42,7 @@ class State {
 
     static gameState = {
         player_spaceship: null,
-        player_money: State.player_money,
+        player_money: 0,
         player_lives: 0,
         player_bullets: [],
         player_mines: [],

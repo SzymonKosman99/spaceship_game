@@ -15,12 +15,10 @@ class BulletFactory {
             const bullet = new EnemyBullet(bulletClass, explosionClass, speed);
             bullet.init(spaceshipPosition);
             State.gameState.enemy_bullets.push(bullet);
-            console.log(State.gameState.enemy_bullets);
         } else {
             const bullet = new PlayerBullet(bulletClass, explosionClass, speed);
             bullet.init(spaceshipPosition);
             State.gameState.player_bullets.push(bullet);
-            console.log(State.gameState.player_bullets);
         }
     }
 }
