@@ -9,7 +9,7 @@ import {
 
 class PlayerBullet extends Bullet {
     constructor(
-        protected bulletClass: BulletClass,
+        public bulletClass: BulletClass,
         protected explosionClass: ExplosionClass,
         protected speed: number,
         protected bullet: HTMLDivElement = document.createElement('div'),
@@ -49,15 +49,17 @@ class PlayerBullet extends Bullet {
     }
 
     public explode(): void {
-        clearInterval(this.updateTranslatePositionY);
-        this.bullet.classList.remove(this.bulletClass);
-        this.bullet.classList.add(this.explosionClass);
-        this.translatePositionY -= this.bullet.offsetWidth / 2;
-        this.translatePositionX = -this.bullet.offsetWidth / 2;
-        this.setTranslatePositions();
-        setTimeout(() => {
-            this.bullet.remove();
-        }, 600);
+        if (this.bulletClass !== 'destroyer_missle') {
+            clearInterval(this.updateTranslatePositionY);
+            this.bullet.classList.remove(this.bulletClass);
+            this.bullet.classList.add(this.explosionClass);
+            this.translatePositionY -= this.bullet.offsetWidth / 2;
+            this.translatePositionX = -this.bullet.offsetWidth / 2;
+            this.setTranslatePositions();
+            setTimeout(() => {
+                this.bullet.remove();
+            }, 600);
+        }
     }
 
     private setTranslatePositions() {

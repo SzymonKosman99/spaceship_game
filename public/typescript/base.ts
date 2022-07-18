@@ -86,7 +86,8 @@ export type BulletClass =
     | 'bullet_red'
     | 'bullet_blue'
     | 'bullet_blue--rotated'
-    | 'bullet_red--rotated';
+    | 'bullet_red--rotated'
+    | 'destroyer_missle';
 
 export type ExplosionClass =
     | 'explosion_small_red'
