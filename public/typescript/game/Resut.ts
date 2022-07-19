@@ -5,6 +5,7 @@ import EnemySpaceship from './EnemySpaceship';
 import { DOMElements, ElementPosition } from '../base';
 
 import State from '../State';
+import PlayerBullet from './PlayerBullet';
 
 const { gameState } = State;
 
@@ -35,7 +36,7 @@ class Result {
     }
 
     public static checkBulletsHits(
-        bullets: Bullet[],
+        bullets: PlayerBullet[],
         enemies: EnemySpaceship[]
     ) {
         bullets.forEach((bullet, bulletIndex, bulletsArray) => {
@@ -44,8 +45,10 @@ class Result {
                 const spaceshipPositions = spaceship.getPosition();
 
                 if (Result.hitCondition(bulletPositions, spaceshipPositions)) {
-                    bullet.explode();
-                    bulletsArray.splice(bulletIndex, 1);
+                    if (bullet.bulletClass !== 'destroyer_missle') {
+                        bullet.explode();
+                        bulletsArray.splice(bulletIndex, 1);
+                    }
                     spaceship.updateLives(1);
                     if (spaceship.getLives() === 0) {
                         spaceship.explode();
