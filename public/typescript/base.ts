@@ -139,6 +139,7 @@ export type GameState = {
     enemy_bullets: EnemyBullet[];
     enemy_spaceships: EnemySpaceship[];
     destroyed_enemies: number;
+    destroyer_missle: IsActive;
     is_game_won: boolean;
     hittedBy: '' | 'bullet' | 'spaceship';
 };

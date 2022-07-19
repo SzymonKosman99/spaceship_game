@@ -49,6 +49,7 @@ class State {
         max_enemy_number: Number(State.getCookieValue('max_enemy_number')),
         enemy_bullets: [],
         enemy_spaceships: [],
+        destroyer_missle: State.destroyer_missle,
         destroyed_enemies: 0,
         is_game_won: false,
         hittedBy: '',
