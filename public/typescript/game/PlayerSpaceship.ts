@@ -4,6 +4,7 @@ import {
     ExplosionClass,
     ElementPosition,
     BulletClass,
+    IsActive,
 } from '../base';
 
 import BulletFactory from './BulletsFactory';
@@ -120,12 +121,28 @@ class PlayerSpaceship extends Spaceship {
                     blastSound.play();
                 }
                 break;
+            case 'x':
+                if (gameState.destroyer_missle === 'active') {
+                    this.blastDestroyer('active');
+                }
+                break;
             default:
                 break;
         }
     };
 
-    private shot() {
+    private blastDestroyer(destroyer_missle: IsActive = 'inactive') {
+        gameState.destroyer_missle = 'inactive';
+        const bulletClass = 'destroyer_missle';
+        BulletFactory.createBullet(
+            bulletClass,
+            this.explosionClass,
+            this.speed,
+            this.getPosition()
+        );
+    }
+
+    private shot(): void {
         const color = State.spaceship_red === 'active' ? '_red' : '_blue';
         const bulletClass = `bullet${color}` as BulletClass;
         BulletFactory.createBullet(
