@@ -46,6 +46,7 @@ class State {
         player_lives: 0,
         player_bullets: [],
         player_mines: [],
+        space_mines_number: 4,
         max_enemy_number: Number(State.getCookieValue('max_enemy_number')),
         enemy_bullets: [],
         enemy_spaceships: [],

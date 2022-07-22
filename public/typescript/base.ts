@@ -2,6 +2,7 @@ import EnemyBullet from './game/EnemyBullet';
 import EnemySpaceship from './game/EnemySpaceship';
 import PlayerBullet from './game/PlayerBullet';
 import PlayerSpaceship from './game/PlayerSpaceship';
+import SpaceMine from './game/SpaceMine';
 
 export const DOMElements = {
     arrowPrev: document.querySelector<HTMLDivElement>('.slider__prev'),
@@ -48,6 +49,9 @@ export const DOMElements = {
     ),
     settingsLayout: document.querySelector<HTMLDivElement>('.settings'),
     shopLayout: document.querySelector<HTMLDivElement>('.shop'),
+    mineExplosion: document.querySelector<HTMLAudioElement>(
+        '[data-mine-explosion]'
+    ),
 
     wallet: document.querySelector<HTMLSpanElement>('.wallet'),
 };
@@ -104,6 +108,8 @@ export type ExplosionClass =
     | 'explosion_big_red'
     | 'explosion_big_blue';
 
+export type MineClass = 'space_mine_blue' | 'space_mine_red';
+
 export type ElementPosition = {
     edgeLeft: number;
     edgeRight: number;
@@ -143,7 +149,8 @@ export type GameState = {
     player_money: number;
     player_lives: number;
     player_bullets: PlayerBullet[];
-    player_mines: unknown;
+    player_mines: SpaceMine[];
+    space_mines_number: number;
     max_enemy_number: number;
     enemy_bullets: EnemyBullet[];
     enemy_spaceships: EnemySpaceship[];
