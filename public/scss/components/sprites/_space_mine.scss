@@ -2,6 +2,7 @@
 .space_mine_red {
     @include size($basic-unit, $basic-unit);
     @include imageBackgroundStyles();
+    opacity: 0.4;
 }
 
 .space_mine_blue {
