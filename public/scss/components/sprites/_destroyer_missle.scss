@@ -3,6 +3,18 @@
     @include imageBackgroundStyles;
     background-image: url('../images/sprites/destroyer_missle.png');
     animation: moves 0.3s infinite steps(15);
+    position: relative;
+    &::before {
+        content: '';
+        box-shadow: 0 0 16px 9px $primary-red-color;
+        position: absolute;
+        top: 51%;
+        left: 51%;
+        transform: translate(-50%, -50%);
+        border-radius: 50%;
+        @include size(10px, 10px);
+        z-index: 1;
+    }
 }
 
 @keyframes moves {

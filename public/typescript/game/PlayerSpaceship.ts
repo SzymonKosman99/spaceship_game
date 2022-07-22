@@ -14,6 +14,7 @@ import Spaceship from './abstract/Spaceship';
 
 const {
     blastSound,
+    destroyerBlast,
     gameField,
     life_bar: life_bar,
     lives_precent,
@@ -124,6 +125,7 @@ class PlayerSpaceship extends Spaceship {
             case 'x':
                 if (gameState.destroyer_missle === 'active') {
                     this.blastDestroyer('active');
+                    destroyerBlast.play();
                 }
                 break;
             default:
@@ -137,7 +139,7 @@ class PlayerSpaceship extends Spaceship {
         BulletFactory.createBullet(
             bulletClass,
             this.explosionClass,
-            this.speed,
+            this.speed / 5,
             this.getPosition()
         );
     }

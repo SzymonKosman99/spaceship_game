@@ -1,4 +1,3 @@
-import Bullet from './game/abstract/Bullet';
 import EnemyBullet from './game/EnemyBullet';
 import EnemySpaceship from './game/EnemySpaceship';
 import PlayerBullet from './game/PlayerBullet';
@@ -7,12 +6,18 @@ import PlayerSpaceship from './game/PlayerSpaceship';
 export const DOMElements = {
     arrowPrev: document.querySelector<HTMLDivElement>('.slider__prev'),
     arrowNext: document.querySelector<HTMLDivElement>('.slider__next'),
+
     buttons: Array.from(document.querySelectorAll<HTMLButtonElement>('.btn')),
     blastSound: document.querySelector<HTMLAudioElement>('[data-blast]'),
     backgroundSound: document.querySelector<HTMLAudioElement>('#bgc-sound'),
+
     clickSound: document.querySelector<HTMLAudioElement>('[data-click]'),
     checkboxs: Array.from(
         document.querySelectorAll<HTMLInputElement>('[data-checkbox]')
+    ),
+
+    destroyerBlast: document.querySelector<HTMLAudioElement>(
+        '[data-destroyer-blast]'
     ),
     details: Array.from(
         document.querySelectorAll<HTMLDetailsElement>('details')
@@ -21,16 +26,19 @@ export const DOMElements = {
     navButtons: Array.from(
         document.querySelectorAll<HTMLButtonElement>('.btn-nav')
     ),
+
     gameField: document.querySelector<HTMLDivElement>('.game-field'),
     infoLayout: document.querySelector<HTMLDivElement>('.info'),
     products: Array.from(
         document.querySelectorAll<HTMLImageElement>('[data-product] img')
     ),
+
     lives_precent: document.querySelector<HTMLDivElement>('.lives_precent'),
     life_bar: document.querySelector<HTMLSpanElement>('.status--player_lives'),
     statusDestroyedEnemies: document.querySelector<HTMLSpanElement>(
         '.status--destroyed_enemies'
     ),
+
     startLayout: document.querySelector<HTMLDivElement>('.start'),
     slides: Array.from(
         document.querySelectorAll<HTMLDivElement>('.slider__content')
@@ -40,6 +48,7 @@ export const DOMElements = {
     ),
     settingsLayout: document.querySelector<HTMLDivElement>('.settings'),
     shopLayout: document.querySelector<HTMLDivElement>('.shop'),
+
     wallet: document.querySelector<HTMLSpanElement>('.wallet'),
 };
 
