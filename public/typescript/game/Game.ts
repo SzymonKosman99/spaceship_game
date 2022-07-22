@@ -5,6 +5,8 @@ import State from '../State';
 import Result from './Resut';
 import SpaceshipsFactory from './SpaceshipsFactory';
 
+import MinesFactory from './MinesFactory';
+
 class Game {
     constructor() {}
     private displayEnemiesInterval = 1000;
@@ -12,7 +14,19 @@ class Game {
 
     public start() {
         SpaceshipsFactory.createPlayerSpaceship();
+        if (State.space_mine === 'active') {
+            MinesFactory.createMines();
+        } else clearInterval(this.checkMinesHits);
     }
+
+    private checkMinesHits = setInterval(() => {
+        requestAnimationFrame(() => {
+            Result.checkHits(
+                State.gameState.player_mines,
+                State.gameState.enemy_spaceships
+            );
+        });
+    }, this.elementsPositionInterval);
 
     private displayEnemies = setInterval(() => {
         if (State.gameState.player_lives <= 0) {
@@ -60,7 +74,7 @@ class Game {
 
     private checkBulletsHits = setInterval(() => {
         requestAnimationFrame(() => {
-            Result.checkBulletsHits(
+            Result.checkHits(
                 State.gameState.player_bullets,
                 State.gameState.enemy_spaceships
             );

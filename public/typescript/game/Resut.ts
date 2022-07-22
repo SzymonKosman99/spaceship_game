@@ -6,6 +6,7 @@ import { DOMElements, ElementPosition } from '../base';
 
 import State from '../State';
 import PlayerBullet from './PlayerBullet';
+import SpaceMine from './SpaceMine';
 
 const { gameState } = State;
 
@@ -20,39 +21,59 @@ class Result {
         });
     }
 
-    private static hitCondition(
-        bulletPositions: ElementPosition,
-        spaceshipPositions: ElementPosition
+    public static checkCollision(
+        playerSpaceship: PlayerSpaceship,
+        enemySpaceships: EnemySpaceship[],
+        bullets: EnemyBullet[]
     ) {
-        if (
-            (bulletPositions.topEdge <= spaceshipPositions.bottomEdge &&
-                bulletPositions.edgeRight > spaceshipPositions.edgeLeft &&
-                bulletPositions.edgeRight < spaceshipPositions.edgeRight) ||
-            (bulletPositions.topEdge <= spaceshipPositions.bottomEdge &&
-                bulletPositions.edgeLeft < spaceshipPositions.edgeRight &&
-                bulletPositions.edgeLeft > spaceshipPositions.edgeLeft)
-        )
-            return true;
+        const spaceshipPosition = playerSpaceship.getPosition();
+
+        enemySpaceships.forEach((enemy, enemyIndex, enemiesArray) => {
+            const enemyPosition = enemy.getPosition();
+            if (Result.colisionCondition(spaceshipPosition, enemyPosition)) {
+                enemy.explode();
+                enemiesArray.splice(enemyIndex, 1);
+                playerSpaceship.updateLives(4);
+                gameState.hittedBy = 'spaceship';
+                if (gameState.player_lives <= 0) playerSpaceship.explode();
+            }
+        });
+
+        bullets.forEach((bullet, bulletIndex, bulletsArray) => {
+            const bulletPositions = bullet.getPosition();
+            if (Result.colisionCondition(spaceshipPosition, bulletPositions)) {
+                bullet.explode();
+                bulletsArray.splice(bulletIndex, 1);
+                playerSpaceship.updateLives(1);
+                gameState.hittedBy = 'bullet';
+                if (gameState.player_lives <= 0) playerSpaceship.explode();
+            }
+        });
     }
 
-    public static checkBulletsHits(
-        bullets: PlayerBullet[],
+    public static checkHits(
+        items: PlayerBullet[] | SpaceMine[],
         enemies: EnemySpaceship[]
     ) {
-        bullets.forEach((bullet, bulletIndex, bulletsArray) => {
-            enemies.forEach((spaceship, spaceshipIndex, spaceshipsArray) => {
+        items.forEach((bullet, bulletIndex) => {
+            enemies.forEach((spaceship, spaceshipIndex) => {
                 const bulletPositions = bullet.getPosition();
                 const spaceshipPositions = spaceship.getPosition();
 
                 if (Result.hitCondition(bulletPositions, spaceshipPositions)) {
-                    if (bullet.bulletClass !== 'destroyer_missle') {
-                        bullet.explode();
-                        bulletsArray.splice(bulletIndex, 1);
+                    if ('bulletClass' in bullet) {
+                        if (bullet.bulletClass !== 'destroyer_missle') {
+                            Result.updateElements(items, bullet, bulletIndex);
+                            spaceship.updateLives(1);
+                        } else spaceship.updateLives(10000);
                     }
-                    spaceship.updateLives(1);
-                    if (spaceship.getLives() === 0) {
+                    if ('mineClass' in bullet) {
+                        Result.updateElements(items, bullet, bulletIndex);
+                        spaceship.updateLives(3);
+                    }
+                    if (spaceship.getLives() <= 0) {
                         spaceship.explode();
-                        spaceshipsArray.splice(spaceshipIndex, 1);
+                        enemies.splice(spaceshipIndex, 1);
                         gameState.destroyed_enemies += 1;
                         DOMElements.statusDestroyedEnemies.textContent = `Destroyed enemies ${gameState.destroyed_enemies}`;
                     }
@@ -87,7 +108,22 @@ class Result {
         });
     }
 
-    private static checkColisionCondition(
+    private static hitCondition(
+        bulletPositions: ElementPosition,
+        spaceshipPositions: ElementPosition
+    ) {
+        if (
+            (bulletPositions.topEdge <= spaceshipPositions.bottomEdge &&
+                bulletPositions.edgeRight > spaceshipPositions.edgeLeft &&
+                bulletPositions.edgeRight < spaceshipPositions.edgeRight) ||
+            (bulletPositions.topEdge <= spaceshipPositions.bottomEdge &&
+                bulletPositions.edgeLeft < spaceshipPositions.edgeRight &&
+                bulletPositions.edgeLeft > spaceshipPositions.edgeLeft)
+        )
+            return true;
+    }
+
+    private static colisionCondition(
         spaceshipPosition: ElementPosition,
         elementPosition: ElementPosition
     ) {
@@ -104,41 +140,13 @@ class Result {
         return false;
     }
 
-    public static checkCollision(
-        playerSpaceship: PlayerSpaceship,
-        enemySpaceships: EnemySpaceship[],
-        bullets: EnemyBullet[]
+    private static updateElements(
+        items: PlayerBullet[] | SpaceMine[],
+        item: PlayerBullet | SpaceMine,
+        itemIndex: number
     ) {
-        const spaceshipPosition = playerSpaceship.getPosition();
-
-        enemySpaceships.forEach((enemy, enemyIndex, enemiesArray) => {
-            const enemyPosition = enemy.getPosition();
-            if (
-                Result.checkColisionCondition(spaceshipPosition, enemyPosition)
-            ) {
-                enemy.explode();
-                enemiesArray.splice(enemyIndex, 1);
-                playerSpaceship.updateLives(4);
-                gameState.hittedBy = 'spaceship';
-                if (gameState.player_lives <= 0) playerSpaceship.explode();
-            }
-        });
-
-        bullets.forEach((bullet, bulletIndex, bulletsArray) => {
-            const bulletPositions = bullet.getPosition();
-            if (
-                Result.checkColisionCondition(
-                    spaceshipPosition,
-                    bulletPositions
-                )
-            ) {
-                bullet.explode();
-                bulletsArray.splice(bulletIndex, 1);
-                playerSpaceship.updateLives(1);
-                gameState.hittedBy = 'bullet';
-                if (gameState.player_lives <= 0) playerSpaceship.explode();
-            }
-        });
+        item.explode();
+        items.splice(itemIndex, 1);
     }
 }
 
