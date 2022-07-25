@@ -18,7 +18,7 @@ router.get('/', (req, res, next) => {
         res.cookie('spaceship_medium', 'inactive');
         res.cookie('spaceship_big', 'inactive');
         res.cookie('space_mine', 'inactive');
-        res.cookie('player_money', '1000');
+        res.cookie('player_money', '1001');
 
         return res.render('start', {
             title: 'Spaceship game',
