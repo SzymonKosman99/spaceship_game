@@ -1,5 +1,6 @@
-const path = require('path')
-const port = process.env.port || 5000
+const path = require('path');
+const port = process.env.port || 5000;
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 const settings = {
     mode: 'development',
@@ -20,7 +21,7 @@ const settings = {
             },
             {
                 test: /\.(s(a|c)ss)$/,
-                use: ['style-loader', 'css-loader', 'sass-loader'],
+                use: [MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader'],
             },
             {
                 test: /\.(svg|ico|png|gif|jpeg|jpg)$/,
@@ -39,6 +40,12 @@ const settings = {
         liveReload: true,
         open: true,
     },
-}
+    plugins: [
+        new MiniCssExtractPlugin({
+            filename: 'bundle.css',
+            chunkFilename: '[id].css',
+        }),
+    ],
+};
 
-module.exports = settings
+module.exports = settings;

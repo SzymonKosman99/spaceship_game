@@ -20,6 +20,7 @@
     "devDependencies": {
         "@types/lodash": "^4.14.182",
         "css-loader": "^6.7.1",
+        "mini-css-extract-plugin": "^2.6.1",
         "node-sass": "^7.0.1",
         "nodemon": "^2.0.16",
         "prettier": "^2.7.0",
