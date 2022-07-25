@@ -26,6 +26,7 @@
 }
 
 .modal--game {
+    cursor: auto;
     position: relative;
     @include modalStyle();
     color: $primary-white-color;
@@ -33,7 +34,7 @@
     .wallet {
         @include size(10%, 40%);
         display: flex;
-        justify-content: flex-start;
+        justify-content: center;
         align-items: center;
         letter-spacing: 1px;
     }
