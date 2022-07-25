@@ -68,6 +68,8 @@ class EnemySpaceship extends Spaceship {
     public explode(): void {
         clearInterval(this.updateTranslatePositionY);
         clearInterval(this.shot);
+        DOMElements.explosionSound.load();
+        DOMElements.explosionSound.play();
         this.spaceship.classList.remove(this.spaceshipClass);
         this.spaceship.classList.add(this.explosionClass);
         State.gameState.player_money += 100;
@@ -119,6 +121,8 @@ class EnemySpaceship extends Spaceship {
                 this.spaceshipClass === `spaceship_big${color}--rotated`) ||
             this.spaceshipClass === `mothership${color}`
         ) {
+            DOMElements.enemyBlast.load();
+            DOMElements.enemyBlast.play();
             BulletFactory.createBullet(
                 `bullet${color}--rotated`,
                 this.explosionClass,

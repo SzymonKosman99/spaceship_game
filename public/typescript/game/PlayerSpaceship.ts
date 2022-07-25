@@ -157,6 +157,8 @@ class PlayerSpaceship extends Spaceship {
 
     public explode(): void {
         clearInterval(this.checkIsButtonPressed);
+        DOMElements.explosionSound.load();
+        DOMElements.explosionSound.play();
         this.removeEvents();
         this.spaceship.classList.remove(this.spaceshipClass);
         this.spaceship.classList.add(this.explosionClass);

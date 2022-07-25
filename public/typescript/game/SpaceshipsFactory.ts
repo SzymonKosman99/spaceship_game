@@ -52,7 +52,7 @@ class SpaceshipsFactory {
 
         const lives =
             spaceshipClass === `mothership${color}`
-                ? 6
+                ? 4
                 : spaceshipClass === `spaceship_big${color}--rotated`
                 ? 3
                 : spaceshipClass === `spaceship_medium${color}--rotated`
@@ -72,7 +72,7 @@ class SpaceshipsFactory {
                 ? 5
                 : 5;
 
-        const newEnemy = new EnemySpaceship(
+        const newEnemy: EnemySpaceship = new EnemySpaceship(
             spaceshipClass,
             explosionClass,
             lives,

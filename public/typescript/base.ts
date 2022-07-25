@@ -24,6 +24,9 @@ export const DOMElements = {
         document.querySelectorAll<HTMLDetailsElement>('details')
     ),
     dots: Array.from(document.querySelectorAll<HTMLSpanElement>('.dot')),
+    enemyBlast: document.querySelector<HTMLAudioElement>('[data-enemy-blast]'),
+    explosionSound:
+        document.querySelector<HTMLAudioElement>('[data-explosion]'),
     navButtons: Array.from(
         document.querySelectorAll<HTMLButtonElement>('.btn-nav')
     ),
@@ -66,6 +69,7 @@ export type SpaceshipModel =
 export type SettingsType =
     | 'muted_click'
     | 'muted_background'
+    | 'max_enemy_number'
     | 'destroyer_missle'
     | 'spaceship_red'
     | 'spaceship_model'
@@ -140,7 +144,7 @@ export type EnemyBig = {
 export type Mothership = {
     spaceshipClass: SpaceshipClass;
     explosionClass: ExplosionClass;
-    lives: 6;
+    lives: 4;
     speed: 4;
 };
 
