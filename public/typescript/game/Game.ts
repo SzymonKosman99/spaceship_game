@@ -7,8 +7,9 @@ import SpaceshipsFactory from './SpaceshipsFactory';
 
 import MinesFactory from './MinesFactory';
 
+const { gameState } = State;
+
 class Game {
-    constructor() {}
     private displayEnemiesInterval = 1000;
     private elementsPositionInterval = 10;
 
@@ -22,52 +23,52 @@ class Game {
     private checkMinesHits = setInterval(() => {
         requestAnimationFrame(() => {
             Result.checkHits(
-                State.gameState.player_mines,
-                State.gameState.enemy_spaceships
+                gameState.player_mines,
+                gameState.enemy_spaceships
             );
         });
     }, this.elementsPositionInterval);
 
     private displayEnemies = setInterval(() => {
-        if (State.gameState.player_lives <= 0) {
+        if (gameState.player_lives <= 0) {
             return this.lose();
         }
         if (
-            State.gameState.max_enemy_number === 0 &&
-            State.gameState.player_lives >= 1 &&
-            State.gameState.enemy_spaceships.length === 0 &&
-            State.gameState.is_game_won === true
+            gameState.max_enemy_number === 0 &&
+            gameState.player_lives >= 1 &&
+            gameState.enemy_spaceships.length === 0 &&
+            gameState.is_game_won === true
         ) {
             return this.win();
         }
-        if (State.gameState.max_enemy_number > 0) {
+        if (gameState.max_enemy_number > 0) {
             SpaceshipsFactory.createEnemySpaceship();
-            State.gameState.max_enemy_number--;
+            gameState.max_enemy_number--;
         }
     }, this.displayEnemiesInterval);
 
     private checkSpaceshipsPosition = setInterval(() => {
         requestAnimationFrame(() => {
             Result.checkSpaceshipsPosition(
-                State.gameState.player_spaceship,
-                State.gameState.enemy_spaceships
+                gameState.player_spaceship,
+                gameState.enemy_spaceships
             );
         });
     }, this.elementsPositionInterval);
 
     private checkBulletsPosition = setInterval(() => {
         requestAnimationFrame(() => {
-            Result.checkBulletsPosition(State.gameState.player_bullets);
-            Result.checkBulletsPosition(State.gameState.enemy_bullets);
+            Result.checkBulletsPosition(gameState.player_bullets);
+            Result.checkBulletsPosition(gameState.enemy_bullets);
         });
     }, this.elementsPositionInterval);
 
     private checkCollision = setInterval(() => {
         requestAnimationFrame(() => {
             Result.checkCollision(
-                State.gameState.player_spaceship,
-                State.gameState.enemy_spaceships,
-                State.gameState.enemy_bullets
+                gameState.player_spaceship,
+                gameState.enemy_spaceships,
+                gameState.enemy_bullets
             );
         });
     }, this.elementsPositionInterval);
@@ -75,8 +76,8 @@ class Game {
     private checkBulletsHits = setInterval(() => {
         requestAnimationFrame(() => {
             Result.checkHits(
-                State.gameState.player_bullets,
-                State.gameState.enemy_spaceships
+                gameState.player_bullets,
+                gameState.enemy_spaceships
             );
         });
     }, this.elementsPositionInterval);
@@ -104,23 +105,25 @@ class Game {
         DOMElements.navButtons = Array.from(
             document.querySelectorAll<HTMLButtonElement>('.btn-nav')
         );
-        console.log(DOMElements.navButtons);
         const myButtons = new Buttons();
         myButtons.init();
-        const some = document.querySelector<HTMLButtonElement>('.some');
-        some.addEventListener('click', () => {
-            const money =
-                Number(State.player_money) +
-                Number(State.gameState.player_money);
-            State.setState('player_money', money, '/game/shop');
-        });
+        const backButton = document.querySelector<HTMLButtonElement>('.back');
+        backButton.addEventListener('click', this.updateGame);
+    }
+
+    private updateGame() {
+        const newEnemiesNumber = State.max_enemy_number + 10;
+        const money =
+            Number(State.player_money) + Number(gameState.player_money);
+        State.setState('player_money', money, '/game/shop');
+        State.setState('max_enemy_number', newEnemiesNumber, 'game/shop');
     }
 
     private clearGameField() {
-        State.gameState.enemy_bullets.forEach((bullet) => bullet.remove());
-        State.gameState.enemy_spaceships.forEach((enemy) => enemy.remove());
-        State.gameState.player_bullets.forEach((bullet) => bullet.remove());
-        State.gameState.player_spaceship.remove();
+        gameState.enemy_bullets.forEach((bullet) => bullet.remove());
+        gameState.enemy_spaceships.forEach((enemy) => enemy.remove());
+        gameState.player_bullets.forEach((bullet) => bullet.remove());
+        gameState.player_spaceship.remove();
         DOMElements.life_bar.remove();
         DOMElements.lives_precent.remove();
         DOMElements.statusDestroyedEnemies.remove();
@@ -132,9 +135,15 @@ class Game {
     }
 
     private createModalText() {
-        const { player_money, destroyed_enemies, hittedBy, is_game_won } =
-            State.gameState;
-        if (State.gameState.is_game_won === false) {
+        const {
+            player_money,
+            destroyed_enemies,
+            hittedBy,
+            is_game_won,
+            max_enemy_number,
+        } = gameState;
+
+        if (gameState.is_game_won === false) {
             const reason =
                 hittedBy === 'bullet' || hittedBy === 'spaceship'
                     ? `Your spaceship has been destroyed by colision with ${hittedBy}`
@@ -143,7 +152,11 @@ class Game {
             return `
             <h3>You lost 😑</h3>
             <div class="modal--game__element"> Destroyed enemy spaceships : ${destroyed_enemies}</div>
+            <br>
             <div class="modal--game__element warning">${reason}</div>
+            <br>
+            <div class="modal--game__element warning">Enemies left :${max_enemy_number}</div>
+            <br>
             <button class="btn-nav" data-href="/game">Play again ➧</button>
             <button class="btn-nav" data-href="/game/shop">Back to shop ↺</button>
 
@@ -152,9 +165,11 @@ class Game {
             return `
             <h3>Congrats you won the game 😀</h3>
             <div class="modal--game__element">Destroyed enemy spaceships : ${destroyed_enemies}</div>
+            <br>
             <span class="wallet">Your earned money : ${player_money}</span>
+            <br>
             <button class="btn-nav" data-href="/game">Play again ➧</button>
-            <button class="btn-nav some" data-href="/game/shop">Go to shop ↺</button>
+            <button class="btn-nav back" data-href="/game/shop">Go to shop ↺</button>
 
             `;
         }
