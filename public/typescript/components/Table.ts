@@ -1,5 +1,21 @@
 import { Product } from '../base';
 
+const descriptions = {
+    space_mine: `When game starts on game field will be set several mines , every mine is going 
+    to explode when enemy ship flied on her, very cheap and also really usefull thing`,
+
+    destroyer_missle: `Player can launch missle which will destroy every enemy ship which will 
+    be on his straight, to shot just press x on your keyboard`,
+
+    spaceship_big: `Big spaceship very durable but unfortunatly esily to hit and also esily to
+    have collision`,
+
+    spaceship_medium: `The best spaceship in this game , much durable then small spaceship and
+    also much faster not so esily for collision`,
+
+    spaceship_small: `Default spaceship which player starts the game ,it is the worst spaceship `,
+};
+
 class Table {
     public renderTable(product: Product) {
         const price: number | string = this.getPrice(product);
@@ -62,7 +78,7 @@ class Table {
             return `
             <tbody>
             <tr>
-                <td>${price}</td>
+                <td>${price} $</td>
                 <td>${description}</td>
             </tr>
             </tbody>
@@ -85,7 +101,6 @@ class Table {
     }
 
     private getColumns(product: Product) {
-        console.log(product);
         if (product === 'destroyer_missle' || product === 'space_mine') {
             return 2;
         } else return 4;
@@ -93,15 +108,15 @@ class Table {
 
     private getDescription(product: Product) {
         return product === 'space_mine'
-            ? 'space mines used to destroy enemy spaceships . Recusandae quidem vitae nihil hic id dolores, maiores sequi architecto ullam aliquam ipsam in sint nulla dolorem suscipit molestiae eligendi soluta quisquam?'
+            ? descriptions.space_mine
             : product === 'destroyer_missle'
-            ? 'destroy every enemy on straight line . Recusandae quidem vitae nihil hic id dolores, maiores sequi architecto ullam aliquam ipsam in sint nulla dolorem suscipit molestiae eligendi soluta quisquam?'
+            ? descriptions.destroyer_missle
             : product === 'spaceship_big'
-            ? 'Big spaceship is awesome . Recusandae quidem vitae nihil hic id dolores, maiores sequi architecto ullam aliquam ipsam in sint nulla dolorem suscipit molestiae eligendi soluta quisquam?'
+            ? descriptions.spaceship_big
             : product === 'spaceship_medium'
-            ? 'spaceship_medium is awesome . Recusandae quidem vitae nihil hic id dolores, maiores sequi architecto ullam aliquam ipsam in sint nulla dolorem suscipit molestiae eligendi soluta quisquam?'
+            ? descriptions.spaceship_medium
             : product === 'spaceship_small'
-            ? 'spaceship_small is awesome . Recusandae quidem vitae nihil hic id dolores, maiores sequi architecto ullam aliquam ipsam in sint nulla dolorem suscipit molestiae eligendi soluta quisquam?'
+            ? descriptions.spaceship_small
             : null;
     }
     private getLives(product: Product) {

@@ -19,6 +19,10 @@ class State {
     static muted_background = State.getCookieValue(
         'muted_background'
     ) as IsActive;
+    static max_enemy_number: number = parseInt(
+        State.getCookieValue('max_enemy_number'),
+        10
+    );
     static destroyer_missle = State.getCookieValue(
         'destroyer_missle'
     ) as IsActive;
@@ -35,7 +39,7 @@ class State {
         'spaceship_medium'
     ) as IsActive;
     static space_mine = State.getCookieValue('space_mine') as IsActive;
-    static player_money: Number = parseInt(
+    static player_money: number = parseInt(
         State.getCookieValue('player_money'),
         10
     );
@@ -47,7 +51,10 @@ class State {
         player_bullets: [],
         player_mines: [],
         space_mines_number: 4,
-        max_enemy_number: Number(State.getCookieValue('max_enemy_number')),
+        max_enemy_number: parseInt(
+            State.getCookieValue('max_enemy_number'),
+            10
+        ),
         enemy_bullets: [],
         enemy_spaceships: [],
         destroyer_missle: State.destroyer_missle,
